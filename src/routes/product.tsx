@@ -65,7 +65,12 @@ function ProductPage() {
 
         <section className="grid gap-4 px-4 pb-8 lg:grid-cols-3 lg:px-16">
           {STEPS.map((step, index) => (
-            <article key={step.title} className="rounded-xl border bg-card p-5">
+            <article
+              key={step.title}
+              id={step.title === "Console & Control Room" ? "console" : undefined}
+              className="scroll-mt-24 rounded-xl border bg-card p-5"
+            >
+              {step.title === "Console & Control Room" && <span id="control-room" />}
               <span className="text-[11px] font-semibold tracking-[0.12em] text-brand uppercase">
                 Step {index + 1}
               </span>
