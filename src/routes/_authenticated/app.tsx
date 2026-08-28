@@ -2,7 +2,6 @@ import { Outlet, createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 
-import { AppShell } from "@/components/app/AppShell";
 import { Wordmark } from "@/components/brand/Logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -51,9 +50,7 @@ function WorkspaceGate() {
   if (!workspace) return <CreateFirstWorkspace />;
 
   return (
-    <AppShell>
-      <Outlet />
-    </AppShell>
+    <Outlet />
   );
 }
 
