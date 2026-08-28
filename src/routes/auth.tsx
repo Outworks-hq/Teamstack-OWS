@@ -1,5 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { createFileRoute, useNavigate, useRouter } from "@tanstack/react-router";
+import { Link, createFileRoute, useNavigate, useRouter } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -111,7 +111,9 @@ function AuthPage() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-canvas px-4 py-10">
       <div className="w-full max-w-[420px] rounded-2xl border bg-background p-8 shadow-card">
-        <Wordmark />
+        <Link to="/" aria-label="TeamStack OWS home">
+          <Wordmark />
+        </Link>
         <h1 className="mt-8 text-2xl font-semibold tracking-tight">
           {mode === "signin" ? "Sign in to your workspace" : "Create your account"}
         </h1>
