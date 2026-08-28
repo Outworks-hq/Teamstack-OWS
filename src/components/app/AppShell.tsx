@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
-import { ChevronDown, LogOut } from "lucide-react";
+import { Building2, Check, ChevronDown, LogOut, MoreHorizontal } from "lucide-react";
 
 import { LogoMark } from "@/components/brand/Logo";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,9 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { supabase } from "@/integrations/supabase/client";
@@ -22,11 +25,15 @@ const NAV = [
   { label: "Control Room", to: "/app/control-room" },
   { label: "Systems", to: "/app/systems" },
   { label: "Connected Operations", to: "/app/flows" },
+] as const;
+
+const MORE_NAV = [
   { label: "Units", to: "/app/units" },
-  { label: "Members", to: "/app/members" },
+  { label: "Members & permissions", to: "/app/members" },
   { label: "Notifications", to: "/app/notifications" },
   { label: "Billing", to: "/app/billing" },
 ] as const;
+
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const { workspace, workspaces, setWorkspaceId, userEmail, myWorkspaceRole } = useWorkspace();
