@@ -23,7 +23,7 @@ export function SiteNav() {
           <Link
             key={item.label}
             to={item.to}
-            hash={item.hash}
+            {...(item.hash ? { hash: item.hash } : {})}
             className="text-[15px] text-foreground/80 transition-colors hover:text-foreground"
             activeProps={{ className: "text-foreground font-medium" }}
           >
