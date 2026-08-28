@@ -14,6 +14,8 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
 import { Route as AuthenticatedAppIndexRouteImport } from './routes/_authenticated/app.index'
+import { Route as AuthenticatedAppConsoleRouteImport } from './routes/_authenticated/app.console'
+import { Route as AuthenticatedAppControlRoomRouteImport } from './routes/_authenticated/app.control-room'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -39,16 +41,31 @@ const AuthenticatedAppIndexRoute = AuthenticatedAppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedAppRoute,
 } as any)
+const AuthenticatedAppConsoleRoute = AuthenticatedAppConsoleRouteImport.update({
+  id: '/console',
+  path: '/console',
+  getParentRoute: () => AuthenticatedAppRoute,
+} as any)
+const AuthenticatedAppControlRoomRoute =
+  AuthenticatedAppControlRoomRouteImport.update({
+    id: '/control-room',
+    path: '/control-room',
+    getParentRoute: () => AuthenticatedAppRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/app': typeof AuthenticatedAppRouteWithChildren
+  '/app/console': typeof AuthenticatedAppConsoleRoute
+  '/app/control-room': typeof AuthenticatedAppControlRoomRoute
   '/app/': typeof AuthenticatedAppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/app/console': typeof AuthenticatedAppConsoleRoute
+  '/app/control-room': typeof AuthenticatedAppControlRoomRoute
   '/app': typeof AuthenticatedAppIndexRoute
 }
 export interface FileRoutesById {
@@ -57,19 +74,24 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/app': typeof AuthenticatedAppRouteWithChildren
+  '/_authenticated/app/console': typeof AuthenticatedAppConsoleRoute
+  '/_authenticated/app/control-room': typeof AuthenticatedAppControlRoomRoute
   '/_authenticated/app/': typeof AuthenticatedAppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/app' | '/app/'
+  fullPaths:
+    '/' | '/auth' | '/app' | '/app/console' | '/app/control-room' | '/app/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/app'
+  to: '/' | '/auth' | '/app/console' | '/app/control-room' | '/app'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/app'
+    | '/_authenticated/app/console'
+    | '/_authenticated/app/control-room'
     | '/_authenticated/app/'
   fileRoutesById: FileRoutesById
 }
@@ -116,14 +138,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppIndexRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
+    '/_authenticated/app/console': {
+      id: '/_authenticated/app/console'
+      path: '/console'
+      fullPath: '/app/console'
+      preLoaderRoute: typeof AuthenticatedAppConsoleRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/app/control-room': {
+      id: '/_authenticated/app/control-room'
+      path: '/control-room'
+      fullPath: '/app/control-room'
+      preLoaderRoute: typeof AuthenticatedAppControlRoomRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
   }
 }
 
 interface AuthenticatedAppRouteChildren {
+  AuthenticatedAppConsoleRoute: typeof AuthenticatedAppConsoleRoute
+  AuthenticatedAppControlRoomRoute: typeof AuthenticatedAppControlRoomRoute
   AuthenticatedAppIndexRoute: typeof AuthenticatedAppIndexRoute
 }
 
 const AuthenticatedAppRouteChildren: AuthenticatedAppRouteChildren = {
+  AuthenticatedAppConsoleRoute: AuthenticatedAppConsoleRoute,
+  AuthenticatedAppControlRoomRoute: AuthenticatedAppControlRoomRoute,
   AuthenticatedAppIndexRoute: AuthenticatedAppIndexRoute,
 }
 
