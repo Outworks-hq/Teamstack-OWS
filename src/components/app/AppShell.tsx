@@ -271,7 +271,7 @@ const UNIT_NAV = [
 const UNIT_MORE = [
   { label: "Alerts", to: "/app/unit/$unitId/alerts" as const, icon: Bell },
   { label: "Access", to: "/app/unit/$unitId/access" as const, icon: KeyRound },
-  { label: "Usage & billing", to: "/app/unit/$unitId/billing" as const, icon: Receipt },
+  { label: "Usage", to: "/app/unit/$unitId/billing" as const, icon: Receipt },
   { label: "Actions", to: "/app/unit/$unitId/actions" as const, icon: Zap },
 ];
 
