@@ -4,7 +4,7 @@ import { Trash2, UserPlus } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
-import { EmptyState, PageHeader, Panel } from "@/components/app/AppShell";
+import { EmptyState, PageHeader, Panel, WorkspaceShell } from "@/components/app/AppShell";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -30,7 +30,11 @@ import { UNIT_ROLES, WORKSPACE_ROLES, roleLabel, timeAgo } from "@/lib/ows/model
 import { useWorkspace } from "@/lib/ows/workspace";
 
 export const Route = createFileRoute("/_authenticated/app/members")({
-  component: MembersPage,
+  component: () => (
+    <WorkspaceShell>
+      <MembersPage />
+    </WorkspaceShell>
+  ),
 });
 
 function MembersPage() {

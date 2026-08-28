@@ -18,14 +18,18 @@ import { Route as ProductRouteImport } from './routes/product'
 import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/app'
 import { Route as AuthenticatedAppIndexRouteImport } from './routes/_authenticated/app.index'
 import { Route as AuthenticatedAppBillingRouteImport } from './routes/_authenticated/app.billing'
-import { Route as AuthenticatedAppConsoleRouteImport } from './routes/_authenticated/app.console'
-import { Route as AuthenticatedAppControlRoomRouteImport } from './routes/_authenticated/app.control-room'
-import { Route as AuthenticatedAppFlowsRouteImport } from './routes/_authenticated/app.flows'
 import { Route as AuthenticatedAppMembersRouteImport } from './routes/_authenticated/app.members'
-import { Route as AuthenticatedAppNotificationsRouteImport } from './routes/_authenticated/app.notifications'
-import { Route as AuthenticatedAppSystemsRouteImport } from './routes/_authenticated/app.systems'
 import { Route as AuthenticatedAppUnitsRouteImport } from './routes/_authenticated/app.units'
-import { Route as AuthenticatedAppSystemsSystemIdRouteImport } from './routes/_authenticated/app.systems.$systemId'
+import { Route as AuthenticatedAppWorkspaceRouteImport } from './routes/_authenticated/app.workspace'
+import { Route as AuthenticatedAppWorkspacesRouteImport } from './routes/_authenticated/app.workspaces'
+import { Route as AuthenticatedAppUnitUnitIdRouteImport } from './routes/_authenticated/app.unit.$unitId'
+import { Route as AuthenticatedAppUnitUnitIdIndexRouteImport } from './routes/_authenticated/app.unit.$unitId.index'
+import { Route as AuthenticatedAppUnitUnitIdAlertsRouteImport } from './routes/_authenticated/app.unit.$unitId.alerts'
+import { Route as AuthenticatedAppUnitUnitIdControlRoomRouteImport } from './routes/_authenticated/app.unit.$unitId.control-room'
+import { Route as AuthenticatedAppUnitUnitIdFlowsRouteImport } from './routes/_authenticated/app.unit.$unitId.flows'
+import { Route as AuthenticatedAppUnitUnitIdSystemsRouteImport } from './routes/_authenticated/app.unit.$unitId.systems'
+import { Route as AuthenticatedAppUnitUnitIdSystemsIndexRouteImport } from './routes/_authenticated/app.unit.$unitId.systems.index'
+import { Route as AuthenticatedAppUnitUnitIdSystemsSystemIdRouteImport } from './routes/_authenticated/app.unit.$unitId.systems.$systemId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -71,36 +75,9 @@ const AuthenticatedAppBillingRoute = AuthenticatedAppBillingRouteImport.update({
   path: '/billing',
   getParentRoute: () => AuthenticatedAppRoute,
 } as any)
-const AuthenticatedAppConsoleRoute = AuthenticatedAppConsoleRouteImport.update({
-  id: '/console',
-  path: '/console',
-  getParentRoute: () => AuthenticatedAppRoute,
-} as any)
-const AuthenticatedAppControlRoomRoute =
-  AuthenticatedAppControlRoomRouteImport.update({
-    id: '/control-room',
-    path: '/control-room',
-    getParentRoute: () => AuthenticatedAppRoute,
-  } as any)
-const AuthenticatedAppFlowsRoute = AuthenticatedAppFlowsRouteImport.update({
-  id: '/flows',
-  path: '/flows',
-  getParentRoute: () => AuthenticatedAppRoute,
-} as any)
 const AuthenticatedAppMembersRoute = AuthenticatedAppMembersRouteImport.update({
   id: '/members',
   path: '/members',
-  getParentRoute: () => AuthenticatedAppRoute,
-} as any)
-const AuthenticatedAppNotificationsRoute =
-  AuthenticatedAppNotificationsRouteImport.update({
-    id: '/notifications',
-    path: '/notifications',
-    getParentRoute: () => AuthenticatedAppRoute,
-  } as any)
-const AuthenticatedAppSystemsRoute = AuthenticatedAppSystemsRouteImport.update({
-  id: '/systems',
-  path: '/systems',
   getParentRoute: () => AuthenticatedAppRoute,
 } as any)
 const AuthenticatedAppUnitsRoute = AuthenticatedAppUnitsRouteImport.update({
@@ -108,11 +85,65 @@ const AuthenticatedAppUnitsRoute = AuthenticatedAppUnitsRouteImport.update({
   path: '/units',
   getParentRoute: () => AuthenticatedAppRoute,
 } as any)
-const AuthenticatedAppSystemsSystemIdRoute =
-  AuthenticatedAppSystemsSystemIdRouteImport.update({
+const AuthenticatedAppWorkspaceRoute =
+  AuthenticatedAppWorkspaceRouteImport.update({
+    id: '/workspace',
+    path: '/workspace',
+    getParentRoute: () => AuthenticatedAppRoute,
+  } as any)
+const AuthenticatedAppWorkspacesRoute =
+  AuthenticatedAppWorkspacesRouteImport.update({
+    id: '/workspaces',
+    path: '/workspaces',
+    getParentRoute: () => AuthenticatedAppRoute,
+  } as any)
+const AuthenticatedAppUnitUnitIdRoute =
+  AuthenticatedAppUnitUnitIdRouteImport.update({
+    id: '/unit/$unitId',
+    path: '/unit/$unitId',
+    getParentRoute: () => AuthenticatedAppRoute,
+  } as any)
+const AuthenticatedAppUnitUnitIdIndexRoute =
+  AuthenticatedAppUnitUnitIdIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedAppUnitUnitIdRoute,
+  } as any)
+const AuthenticatedAppUnitUnitIdAlertsRoute =
+  AuthenticatedAppUnitUnitIdAlertsRouteImport.update({
+    id: '/alerts',
+    path: '/alerts',
+    getParentRoute: () => AuthenticatedAppUnitUnitIdRoute,
+  } as any)
+const AuthenticatedAppUnitUnitIdControlRoomRoute =
+  AuthenticatedAppUnitUnitIdControlRoomRouteImport.update({
+    id: '/control-room',
+    path: '/control-room',
+    getParentRoute: () => AuthenticatedAppUnitUnitIdRoute,
+  } as any)
+const AuthenticatedAppUnitUnitIdFlowsRoute =
+  AuthenticatedAppUnitUnitIdFlowsRouteImport.update({
+    id: '/flows',
+    path: '/flows',
+    getParentRoute: () => AuthenticatedAppUnitUnitIdRoute,
+  } as any)
+const AuthenticatedAppUnitUnitIdSystemsRoute =
+  AuthenticatedAppUnitUnitIdSystemsRouteImport.update({
+    id: '/systems',
+    path: '/systems',
+    getParentRoute: () => AuthenticatedAppUnitUnitIdRoute,
+  } as any)
+const AuthenticatedAppUnitUnitIdSystemsIndexRoute =
+  AuthenticatedAppUnitUnitIdSystemsIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedAppUnitUnitIdSystemsRoute,
+  } as any)
+const AuthenticatedAppUnitUnitIdSystemsSystemIdRoute =
+  AuthenticatedAppUnitUnitIdSystemsSystemIdRouteImport.update({
     id: '/$systemId',
     path: '/$systemId',
-    getParentRoute: () => AuthenticatedAppSystemsRoute,
+    getParentRoute: () => AuthenticatedAppUnitUnitIdSystemsRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -123,15 +154,19 @@ export interface FileRoutesByFullPath {
   '/product': typeof ProductRoute
   '/app': typeof AuthenticatedAppRouteWithChildren
   '/app/billing': typeof AuthenticatedAppBillingRoute
-  '/app/console': typeof AuthenticatedAppConsoleRoute
-  '/app/control-room': typeof AuthenticatedAppControlRoomRoute
-  '/app/flows': typeof AuthenticatedAppFlowsRoute
   '/app/members': typeof AuthenticatedAppMembersRoute
-  '/app/notifications': typeof AuthenticatedAppNotificationsRoute
-  '/app/systems': typeof AuthenticatedAppSystemsRouteWithChildren
   '/app/units': typeof AuthenticatedAppUnitsRoute
+  '/app/workspace': typeof AuthenticatedAppWorkspaceRoute
+  '/app/workspaces': typeof AuthenticatedAppWorkspacesRoute
   '/app/': typeof AuthenticatedAppIndexRoute
-  '/app/systems/$systemId': typeof AuthenticatedAppSystemsSystemIdRoute
+  '/app/unit/$unitId': typeof AuthenticatedAppUnitUnitIdRouteWithChildren
+  '/app/unit/$unitId/alerts': typeof AuthenticatedAppUnitUnitIdAlertsRoute
+  '/app/unit/$unitId/control-room': typeof AuthenticatedAppUnitUnitIdControlRoomRoute
+  '/app/unit/$unitId/flows': typeof AuthenticatedAppUnitUnitIdFlowsRoute
+  '/app/unit/$unitId/systems': typeof AuthenticatedAppUnitUnitIdSystemsRouteWithChildren
+  '/app/unit/$unitId/': typeof AuthenticatedAppUnitUnitIdIndexRoute
+  '/app/unit/$unitId/systems/$systemId': typeof AuthenticatedAppUnitUnitIdSystemsSystemIdRoute
+  '/app/unit/$unitId/systems/': typeof AuthenticatedAppUnitUnitIdSystemsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -140,15 +175,17 @@ export interface FileRoutesByTo {
   '/pricing': typeof PricingRoute
   '/product': typeof ProductRoute
   '/app/billing': typeof AuthenticatedAppBillingRoute
-  '/app/console': typeof AuthenticatedAppConsoleRoute
-  '/app/control-room': typeof AuthenticatedAppControlRoomRoute
-  '/app/flows': typeof AuthenticatedAppFlowsRoute
   '/app/members': typeof AuthenticatedAppMembersRoute
-  '/app/notifications': typeof AuthenticatedAppNotificationsRoute
-  '/app/systems': typeof AuthenticatedAppSystemsRouteWithChildren
   '/app/units': typeof AuthenticatedAppUnitsRoute
+  '/app/workspace': typeof AuthenticatedAppWorkspaceRoute
+  '/app/workspaces': typeof AuthenticatedAppWorkspacesRoute
   '/app': typeof AuthenticatedAppIndexRoute
-  '/app/systems/$systemId': typeof AuthenticatedAppSystemsSystemIdRoute
+  '/app/unit/$unitId/alerts': typeof AuthenticatedAppUnitUnitIdAlertsRoute
+  '/app/unit/$unitId/control-room': typeof AuthenticatedAppUnitUnitIdControlRoomRoute
+  '/app/unit/$unitId/flows': typeof AuthenticatedAppUnitUnitIdFlowsRoute
+  '/app/unit/$unitId': typeof AuthenticatedAppUnitUnitIdIndexRoute
+  '/app/unit/$unitId/systems/$systemId': typeof AuthenticatedAppUnitUnitIdSystemsSystemIdRoute
+  '/app/unit/$unitId/systems': typeof AuthenticatedAppUnitUnitIdSystemsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -160,15 +197,19 @@ export interface FileRoutesById {
   '/product': typeof ProductRoute
   '/_authenticated/app': typeof AuthenticatedAppRouteWithChildren
   '/_authenticated/app/billing': typeof AuthenticatedAppBillingRoute
-  '/_authenticated/app/console': typeof AuthenticatedAppConsoleRoute
-  '/_authenticated/app/control-room': typeof AuthenticatedAppControlRoomRoute
-  '/_authenticated/app/flows': typeof AuthenticatedAppFlowsRoute
   '/_authenticated/app/members': typeof AuthenticatedAppMembersRoute
-  '/_authenticated/app/notifications': typeof AuthenticatedAppNotificationsRoute
-  '/_authenticated/app/systems': typeof AuthenticatedAppSystemsRouteWithChildren
   '/_authenticated/app/units': typeof AuthenticatedAppUnitsRoute
+  '/_authenticated/app/workspace': typeof AuthenticatedAppWorkspaceRoute
+  '/_authenticated/app/workspaces': typeof AuthenticatedAppWorkspacesRoute
   '/_authenticated/app/': typeof AuthenticatedAppIndexRoute
-  '/_authenticated/app/systems/$systemId': typeof AuthenticatedAppSystemsSystemIdRoute
+  '/_authenticated/app/unit/$unitId': typeof AuthenticatedAppUnitUnitIdRouteWithChildren
+  '/_authenticated/app/unit/$unitId/alerts': typeof AuthenticatedAppUnitUnitIdAlertsRoute
+  '/_authenticated/app/unit/$unitId/control-room': typeof AuthenticatedAppUnitUnitIdControlRoomRoute
+  '/_authenticated/app/unit/$unitId/flows': typeof AuthenticatedAppUnitUnitIdFlowsRoute
+  '/_authenticated/app/unit/$unitId/systems': typeof AuthenticatedAppUnitUnitIdSystemsRouteWithChildren
+  '/_authenticated/app/unit/$unitId/': typeof AuthenticatedAppUnitUnitIdIndexRoute
+  '/_authenticated/app/unit/$unitId/systems/$systemId': typeof AuthenticatedAppUnitUnitIdSystemsSystemIdRoute
+  '/_authenticated/app/unit/$unitId/systems/': typeof AuthenticatedAppUnitUnitIdSystemsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -180,15 +221,19 @@ export interface FileRouteTypes {
     | '/product'
     | '/app'
     | '/app/billing'
-    | '/app/console'
-    | '/app/control-room'
-    | '/app/flows'
     | '/app/members'
-    | '/app/notifications'
-    | '/app/systems'
     | '/app/units'
+    | '/app/workspace'
+    | '/app/workspaces'
     | '/app/'
-    | '/app/systems/$systemId'
+    | '/app/unit/$unitId'
+    | '/app/unit/$unitId/alerts'
+    | '/app/unit/$unitId/control-room'
+    | '/app/unit/$unitId/flows'
+    | '/app/unit/$unitId/systems'
+    | '/app/unit/$unitId/'
+    | '/app/unit/$unitId/systems/$systemId'
+    | '/app/unit/$unitId/systems/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -197,15 +242,17 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/product'
     | '/app/billing'
-    | '/app/console'
-    | '/app/control-room'
-    | '/app/flows'
     | '/app/members'
-    | '/app/notifications'
-    | '/app/systems'
     | '/app/units'
+    | '/app/workspace'
+    | '/app/workspaces'
     | '/app'
-    | '/app/systems/$systemId'
+    | '/app/unit/$unitId/alerts'
+    | '/app/unit/$unitId/control-room'
+    | '/app/unit/$unitId/flows'
+    | '/app/unit/$unitId'
+    | '/app/unit/$unitId/systems/$systemId'
+    | '/app/unit/$unitId/systems'
   id:
     | '__root__'
     | '/'
@@ -216,15 +263,19 @@ export interface FileRouteTypes {
     | '/product'
     | '/_authenticated/app'
     | '/_authenticated/app/billing'
-    | '/_authenticated/app/console'
-    | '/_authenticated/app/control-room'
-    | '/_authenticated/app/flows'
     | '/_authenticated/app/members'
-    | '/_authenticated/app/notifications'
-    | '/_authenticated/app/systems'
     | '/_authenticated/app/units'
+    | '/_authenticated/app/workspace'
+    | '/_authenticated/app/workspaces'
     | '/_authenticated/app/'
-    | '/_authenticated/app/systems/$systemId'
+    | '/_authenticated/app/unit/$unitId'
+    | '/_authenticated/app/unit/$unitId/alerts'
+    | '/_authenticated/app/unit/$unitId/control-room'
+    | '/_authenticated/app/unit/$unitId/flows'
+    | '/_authenticated/app/unit/$unitId/systems'
+    | '/_authenticated/app/unit/$unitId/'
+    | '/_authenticated/app/unit/$unitId/systems/$systemId'
+    | '/_authenticated/app/unit/$unitId/systems/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -301,46 +352,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppBillingRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
-    '/_authenticated/app/console': {
-      id: '/_authenticated/app/console'
-      path: '/console'
-      fullPath: '/app/console'
-      preLoaderRoute: typeof AuthenticatedAppConsoleRouteImport
-      parentRoute: typeof AuthenticatedAppRoute
-    }
-    '/_authenticated/app/control-room': {
-      id: '/_authenticated/app/control-room'
-      path: '/control-room'
-      fullPath: '/app/control-room'
-      preLoaderRoute: typeof AuthenticatedAppControlRoomRouteImport
-      parentRoute: typeof AuthenticatedAppRoute
-    }
-    '/_authenticated/app/flows': {
-      id: '/_authenticated/app/flows'
-      path: '/flows'
-      fullPath: '/app/flows'
-      preLoaderRoute: typeof AuthenticatedAppFlowsRouteImport
-      parentRoute: typeof AuthenticatedAppRoute
-    }
     '/_authenticated/app/members': {
       id: '/_authenticated/app/members'
       path: '/members'
       fullPath: '/app/members'
       preLoaderRoute: typeof AuthenticatedAppMembersRouteImport
-      parentRoute: typeof AuthenticatedAppRoute
-    }
-    '/_authenticated/app/notifications': {
-      id: '/_authenticated/app/notifications'
-      path: '/notifications'
-      fullPath: '/app/notifications'
-      preLoaderRoute: typeof AuthenticatedAppNotificationsRouteImport
-      parentRoute: typeof AuthenticatedAppRoute
-    }
-    '/_authenticated/app/systems': {
-      id: '/_authenticated/app/systems'
-      path: '/systems'
-      fullPath: '/app/systems'
-      preLoaderRoute: typeof AuthenticatedAppSystemsRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
     '/_authenticated/app/units': {
@@ -350,52 +366,140 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppUnitsRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
-    '/_authenticated/app/systems/$systemId': {
-      id: '/_authenticated/app/systems/$systemId'
+    '/_authenticated/app/workspace': {
+      id: '/_authenticated/app/workspace'
+      path: '/workspace'
+      fullPath: '/app/workspace'
+      preLoaderRoute: typeof AuthenticatedAppWorkspaceRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/app/workspaces': {
+      id: '/_authenticated/app/workspaces'
+      path: '/workspaces'
+      fullPath: '/app/workspaces'
+      preLoaderRoute: typeof AuthenticatedAppWorkspacesRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/app/unit/$unitId': {
+      id: '/_authenticated/app/unit/$unitId'
+      path: '/unit/$unitId'
+      fullPath: '/app/unit/$unitId'
+      preLoaderRoute: typeof AuthenticatedAppUnitUnitIdRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/app/unit/$unitId/': {
+      id: '/_authenticated/app/unit/$unitId/'
+      path: '/'
+      fullPath: '/app/unit/$unitId/'
+      preLoaderRoute: typeof AuthenticatedAppUnitUnitIdIndexRouteImport
+      parentRoute: typeof AuthenticatedAppUnitUnitIdRoute
+    }
+    '/_authenticated/app/unit/$unitId/alerts': {
+      id: '/_authenticated/app/unit/$unitId/alerts'
+      path: '/alerts'
+      fullPath: '/app/unit/$unitId/alerts'
+      preLoaderRoute: typeof AuthenticatedAppUnitUnitIdAlertsRouteImport
+      parentRoute: typeof AuthenticatedAppUnitUnitIdRoute
+    }
+    '/_authenticated/app/unit/$unitId/control-room': {
+      id: '/_authenticated/app/unit/$unitId/control-room'
+      path: '/control-room'
+      fullPath: '/app/unit/$unitId/control-room'
+      preLoaderRoute: typeof AuthenticatedAppUnitUnitIdControlRoomRouteImport
+      parentRoute: typeof AuthenticatedAppUnitUnitIdRoute
+    }
+    '/_authenticated/app/unit/$unitId/flows': {
+      id: '/_authenticated/app/unit/$unitId/flows'
+      path: '/flows'
+      fullPath: '/app/unit/$unitId/flows'
+      preLoaderRoute: typeof AuthenticatedAppUnitUnitIdFlowsRouteImport
+      parentRoute: typeof AuthenticatedAppUnitUnitIdRoute
+    }
+    '/_authenticated/app/unit/$unitId/systems': {
+      id: '/_authenticated/app/unit/$unitId/systems'
+      path: '/systems'
+      fullPath: '/app/unit/$unitId/systems'
+      preLoaderRoute: typeof AuthenticatedAppUnitUnitIdSystemsRouteImport
+      parentRoute: typeof AuthenticatedAppUnitUnitIdRoute
+    }
+    '/_authenticated/app/unit/$unitId/systems/': {
+      id: '/_authenticated/app/unit/$unitId/systems/'
+      path: '/'
+      fullPath: '/app/unit/$unitId/systems/'
+      preLoaderRoute: typeof AuthenticatedAppUnitUnitIdSystemsIndexRouteImport
+      parentRoute: typeof AuthenticatedAppUnitUnitIdSystemsRoute
+    }
+    '/_authenticated/app/unit/$unitId/systems/$systemId': {
+      id: '/_authenticated/app/unit/$unitId/systems/$systemId'
       path: '/$systemId'
-      fullPath: '/app/systems/$systemId'
-      preLoaderRoute: typeof AuthenticatedAppSystemsSystemIdRouteImport
-      parentRoute: typeof AuthenticatedAppSystemsRoute
+      fullPath: '/app/unit/$unitId/systems/$systemId'
+      preLoaderRoute: typeof AuthenticatedAppUnitUnitIdSystemsSystemIdRouteImport
+      parentRoute: typeof AuthenticatedAppUnitUnitIdSystemsRoute
     }
   }
 }
 
-interface AuthenticatedAppSystemsRouteChildren {
-  AuthenticatedAppSystemsSystemIdRoute: typeof AuthenticatedAppSystemsSystemIdRoute
+interface AuthenticatedAppUnitUnitIdSystemsRouteChildren {
+  AuthenticatedAppUnitUnitIdSystemsSystemIdRoute: typeof AuthenticatedAppUnitUnitIdSystemsSystemIdRoute
+  AuthenticatedAppUnitUnitIdSystemsIndexRoute: typeof AuthenticatedAppUnitUnitIdSystemsIndexRoute
 }
 
-const AuthenticatedAppSystemsRouteChildren: AuthenticatedAppSystemsRouteChildren =
+const AuthenticatedAppUnitUnitIdSystemsRouteChildren: AuthenticatedAppUnitUnitIdSystemsRouteChildren =
   {
-    AuthenticatedAppSystemsSystemIdRoute: AuthenticatedAppSystemsSystemIdRoute,
+    AuthenticatedAppUnitUnitIdSystemsSystemIdRoute:
+      AuthenticatedAppUnitUnitIdSystemsSystemIdRoute,
+    AuthenticatedAppUnitUnitIdSystemsIndexRoute:
+      AuthenticatedAppUnitUnitIdSystemsIndexRoute,
   }
 
-const AuthenticatedAppSystemsRouteWithChildren =
-  AuthenticatedAppSystemsRoute._addFileChildren(
-    AuthenticatedAppSystemsRouteChildren,
+const AuthenticatedAppUnitUnitIdSystemsRouteWithChildren =
+  AuthenticatedAppUnitUnitIdSystemsRoute._addFileChildren(
+    AuthenticatedAppUnitUnitIdSystemsRouteChildren,
+  )
+
+interface AuthenticatedAppUnitUnitIdRouteChildren {
+  AuthenticatedAppUnitUnitIdAlertsRoute: typeof AuthenticatedAppUnitUnitIdAlertsRoute
+  AuthenticatedAppUnitUnitIdControlRoomRoute: typeof AuthenticatedAppUnitUnitIdControlRoomRoute
+  AuthenticatedAppUnitUnitIdFlowsRoute: typeof AuthenticatedAppUnitUnitIdFlowsRoute
+  AuthenticatedAppUnitUnitIdSystemsRoute: typeof AuthenticatedAppUnitUnitIdSystemsRouteWithChildren
+  AuthenticatedAppUnitUnitIdIndexRoute: typeof AuthenticatedAppUnitUnitIdIndexRoute
+}
+
+const AuthenticatedAppUnitUnitIdRouteChildren: AuthenticatedAppUnitUnitIdRouteChildren =
+  {
+    AuthenticatedAppUnitUnitIdAlertsRoute:
+      AuthenticatedAppUnitUnitIdAlertsRoute,
+    AuthenticatedAppUnitUnitIdControlRoomRoute:
+      AuthenticatedAppUnitUnitIdControlRoomRoute,
+    AuthenticatedAppUnitUnitIdFlowsRoute: AuthenticatedAppUnitUnitIdFlowsRoute,
+    AuthenticatedAppUnitUnitIdSystemsRoute:
+      AuthenticatedAppUnitUnitIdSystemsRouteWithChildren,
+    AuthenticatedAppUnitUnitIdIndexRoute: AuthenticatedAppUnitUnitIdIndexRoute,
+  }
+
+const AuthenticatedAppUnitUnitIdRouteWithChildren =
+  AuthenticatedAppUnitUnitIdRoute._addFileChildren(
+    AuthenticatedAppUnitUnitIdRouteChildren,
   )
 
 interface AuthenticatedAppRouteChildren {
   AuthenticatedAppBillingRoute: typeof AuthenticatedAppBillingRoute
-  AuthenticatedAppConsoleRoute: typeof AuthenticatedAppConsoleRoute
-  AuthenticatedAppControlRoomRoute: typeof AuthenticatedAppControlRoomRoute
-  AuthenticatedAppFlowsRoute: typeof AuthenticatedAppFlowsRoute
   AuthenticatedAppMembersRoute: typeof AuthenticatedAppMembersRoute
-  AuthenticatedAppNotificationsRoute: typeof AuthenticatedAppNotificationsRoute
-  AuthenticatedAppSystemsRoute: typeof AuthenticatedAppSystemsRouteWithChildren
   AuthenticatedAppUnitsRoute: typeof AuthenticatedAppUnitsRoute
+  AuthenticatedAppWorkspaceRoute: typeof AuthenticatedAppWorkspaceRoute
+  AuthenticatedAppWorkspacesRoute: typeof AuthenticatedAppWorkspacesRoute
   AuthenticatedAppIndexRoute: typeof AuthenticatedAppIndexRoute
+  AuthenticatedAppUnitUnitIdRoute: typeof AuthenticatedAppUnitUnitIdRouteWithChildren
 }
 
 const AuthenticatedAppRouteChildren: AuthenticatedAppRouteChildren = {
   AuthenticatedAppBillingRoute: AuthenticatedAppBillingRoute,
-  AuthenticatedAppConsoleRoute: AuthenticatedAppConsoleRoute,
-  AuthenticatedAppControlRoomRoute: AuthenticatedAppControlRoomRoute,
-  AuthenticatedAppFlowsRoute: AuthenticatedAppFlowsRoute,
   AuthenticatedAppMembersRoute: AuthenticatedAppMembersRoute,
-  AuthenticatedAppNotificationsRoute: AuthenticatedAppNotificationsRoute,
-  AuthenticatedAppSystemsRoute: AuthenticatedAppSystemsRouteWithChildren,
   AuthenticatedAppUnitsRoute: AuthenticatedAppUnitsRoute,
+  AuthenticatedAppWorkspaceRoute: AuthenticatedAppWorkspaceRoute,
+  AuthenticatedAppWorkspacesRoute: AuthenticatedAppWorkspacesRoute,
   AuthenticatedAppIndexRoute: AuthenticatedAppIndexRoute,
+  AuthenticatedAppUnitUnitIdRoute: AuthenticatedAppUnitUnitIdRouteWithChildren,
 }
 
 const AuthenticatedAppRouteWithChildren =

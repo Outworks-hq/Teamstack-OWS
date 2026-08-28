@@ -4,7 +4,7 @@ import { Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
-import { EmptyState, PageHeader, Panel } from "@/components/app/AppShell";
+import { EmptyState, PageHeader, Panel, WorkspaceShell } from "@/components/app/AppShell";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -38,7 +38,11 @@ import {
 import { useWorkspace } from "@/lib/ows/workspace";
 
 export const Route = createFileRoute("/_authenticated/app/units")({
-  component: UnitsPage,
+  component: () => (
+    <WorkspaceShell>
+      <UnitsPage />
+    </WorkspaceShell>
+  ),
 });
 
 function UnitsPage() {
