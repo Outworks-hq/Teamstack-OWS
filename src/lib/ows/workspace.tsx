@@ -133,12 +133,43 @@ export function WorkspaceProvider({
     void queryClient.invalidateQueries();
   }, [queryClient]);
 
+  const [unitIdState, setUnitIdState] = useState<string | null>(() =>
+    typeof window === "undefined" ? null : window.localStorage.getItem(UNIT_STORAGE_KEY),
+  );
+
+  const unitId = unitIdState && units.some((u) => u.id === unitIdState) ? unitIdState : null;
+  const unit = units.find((u) => u.id === unitId) ?? null;
+
+  const setUnitId = useCallback((id: string | null) => {
+    if (id) window.localStorage.setItem(UNIT_STORAGE_KEY, id);
+    else window.localStorage.removeItem(UNIT_STORAGE_KEY);
+    setUnitIdState(id);
+  }, []);
+
+  // Reset the active Unit whenever the Workspace changes.
+  useEffect(() => {
+    if (unitIdState && units.length > 0 && !units.some((u) => u.id === unitIdState)) {
+      setUnitId(null);
+    }
+  }, [unitIdState, units, setUnitId]);
+
+  const scope = useCallback(
+    <T extends { unit_id: string | null }>(rows: T[]) =>
+      unitId ? rows.filter((row) => row.unit_id === unitId) : rows,
+    [unitId],
+  );
+
   const value: WorkspaceContextValue = {
     userId,
     userEmail,
     workspaces,
     workspace,
     setWorkspaceId,
+    unitId,
+    unit,
+    setUnitId,
+    scope,
+
     members,
     profiles,
     units,
