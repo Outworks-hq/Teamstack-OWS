@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createWorkspace } from "@/lib/ows/data";
+import { DEMO_USER, isDemoMode } from "@/lib/ows/demo";
 import { WorkspaceProvider, useAuthUser, useWorkspace } from "@/lib/ows/workspace";
 
 export const Route = createFileRoute("/_authenticated/app")({
