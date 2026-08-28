@@ -7,6 +7,7 @@ import * as data from "./data";
 import type { Profile, Unit, UnitMember, Workspace, WorkspaceMember } from "./model";
 
 const STORAGE_KEY = "ows.workspace";
+const UNIT_STORAGE_KEY = "ows.unit";
 
 interface WorkspaceContextValue {
   userId: string;
@@ -14,6 +15,12 @@ interface WorkspaceContextValue {
   workspaces: Workspace[];
   workspace: Workspace | null;
   setWorkspaceId: (id: string) => void;
+  /** Active Unit inside the workspace. null means the workspace-wide overview. */
+  unitId: string | null;
+  unit: Unit | null;
+  setUnitId: (id: string | null) => void;
+  /** Narrows any unit-tagged rows to the active Unit (pass-through when viewing all Units). */
+  scope: <T extends { unit_id: string | null }>(rows: T[]) => T[];
   members: WorkspaceMember[];
   profiles: Profile[];
   units: Unit[];
