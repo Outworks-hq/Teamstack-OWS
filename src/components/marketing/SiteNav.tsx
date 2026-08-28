@@ -4,11 +4,11 @@ import { Wordmark } from "@/components/brand/Logo";
 import { Button } from "@/components/ui/button";
 
 const NAV = [
-  { label: "Product", to: "/product" },
+  { label: "Product", to: "/product", hash: undefined },
   { label: "Console", to: "/product", hash: "console" },
   { label: "Control Room", to: "/product", hash: "control-room" },
-  { label: "Integrations", to: "/integrations" },
-  { label: "Pricing", to: "/pricing" },
+  { label: "Integrations", to: "/integrations", hash: undefined },
+  { label: "Pricing", to: "/pricing", hash: undefined },
 ] as const;
 
 export function SiteNav() {
