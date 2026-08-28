@@ -1,3 +1,4 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, useNavigate, useRouter } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -9,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { lovable } from "@/integrations/lovable/index";
 import { supabase } from "@/integrations/supabase/client";
 import { ensureProfile } from "@/lib/ows/data";
+import { startDemoMode } from "@/lib/ows/demo";
 
 const TITLE = "Sign in — TeamStack OWS";
 const DESCRIPTION =
@@ -31,6 +33,7 @@ export const Route = createFileRoute("/auth")({
 function AuthPage() {
   const navigate = useNavigate();
   const router = useRouter();
+  const queryClient = useQueryClient();
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -159,6 +162,26 @@ function AuthPage() {
         <Button variant="outline" className="w-full" onClick={onGoogle} disabled={busy}>
           Continue with Google
         </Button>
+
+        <div className="mt-5 rounded-xl border border-dashed p-4">
+          <p className="text-[13px] font-medium">Just looking around?</p>
+          <p className="mt-1 text-[12px] text-muted-foreground">
+            Open a fully populated sample Workspace — units, members, systems, alerts, flows and
+            billing. No account needed, and nothing you do there touches real data or external
+            platforms.
+          </p>
+          <Button
+            variant="secondary"
+            className="mt-3 w-full"
+            onClick={() => {
+              queryClient.clear();
+              startDemoMode();
+              void navigate({ to: "/app/console", replace: true });
+            }}
+          >
+            View Demo Workspace
+          </Button>
+        </div>
 
         <p className="mt-6 text-center text-sm text-muted-foreground">
           {mode === "signin" ? "Need an account?" : "Already have an account?"}{" "}

@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { supabase } from "@/integrations/supabase/client";
+import { exitDemoMode, isDemoMode } from "@/lib/ows/demo";
 import { roleLabel } from "@/lib/ows/model";
 import { useWorkspace } from "@/lib/ows/workspace";
 
@@ -31,6 +32,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const { workspace, workspaces, setWorkspaceId, userEmail, myWorkspaceRole } = useWorkspace();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const demoMode = isDemoMode();
+
+  async function leaveDemo() {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    exitDemoMode();
+    window.location.href = "/auth";
+  }
 
   async function signOut() {
     await queryClient.cancelQueries();
@@ -78,6 +87,17 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="flex items-center gap-3">
+            {demoMode && (
+              <span className="hidden items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-2.5 py-1 text-[11px] font-medium text-brand sm:inline-flex">
+                <span className="size-1.5 rounded-full bg-brand" />
+                Demo Workspace — sample data only
+              </span>
+            )}
+            {demoMode && (
+              <Button variant="outline" size="sm" onClick={leaveDemo}>
+                Exit demo
+              </Button>
+            )}
             {myWorkspaceRole && (
               <span className="hidden rounded-full bg-secondary px-2.5 py-1 text-[11px] font-medium text-secondary-foreground sm:inline">
                 {roleLabel(myWorkspaceRole)}
@@ -94,8 +114,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   {userEmail}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => void signOut()}>
-                  <LogOut className="size-4" /> Sign out
+                <DropdownMenuItem onClick={() => void (demoMode ? leaveDemo() : signOut())}>
+                  <LogOut className="size-4" /> {demoMode ? "Exit demo" : "Sign out"}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

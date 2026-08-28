@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createWorkspace } from "@/lib/ows/data";
+import { DEMO_USER, isDemoMode } from "@/lib/ows/demo";
 import { WorkspaceProvider, useAuthUser, useWorkspace } from "@/lib/ows/workspace";
 
 export const Route = createFileRoute("/_authenticated/app")({
@@ -15,7 +16,11 @@ export const Route = createFileRoute("/_authenticated/app")({
 });
 
 function AppLayout() {
-  const { loading, userId, email } = useAuthUser();
+  const auth = useAuthUser();
+  const demoMode = isDemoMode();
+  const loading = demoMode ? false : auth.loading;
+  const userId = demoMode ? DEMO_USER.id : auth.userId;
+  const email = demoMode ? DEMO_USER.email : auth.email;
 
   if (loading || !userId) {
     return (
