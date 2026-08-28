@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 const TITLE = "Console — TeamStack OWS";
 const DESCRIPTION =
-  "Console is the unified day-to-day operating dashboard for the platforms connected to TeamStack OWS — monitor what's happening, understand status, and take direct action in one place.";
+  "Console brings your connected platforms together inside TeamStack OWS, giving you one place to see what is happening, organize how systems connect across your Units, review warnings, usage, billing, access, and activity, and manage your day-to-day operations without jumping between separate dashboards.";
 
 export const Route = createFileRoute("/console")({
   head: () => ({
@@ -24,19 +24,19 @@ export const Route = createFileRoute("/console")({
 const POINTS = [
   {
     title: "One place for the day-to-day",
-    body: "Console brings information from your connected platforms — AWS, Stripe, GitHub, Vercel, Twilio, Netlify, Google Workspace — into a single view, so your team stops jumping between separate platform dashboards.",
+    body: "Bring information from AWS, Stripe, GitHub, Vercel, Twilio, Google Workspace, and other connected platforms into one organized operating view.",
   },
   {
-    title: "Understand what's happening",
-    body: "See warnings, status, billing and usage, and access information for everything connected to a Unit, summarized in plain language.",
+    title: "Understand what’s happening",
+    body: "See system status, warnings, usage, billing, access, activity, and other important information across everything connected to a Unit.",
   },
   {
-    title: "Take direct action",
-    body: "Console is not view-only. Where permissions allow, teams take normal, direct operational actions from Console itself.",
+    title: "Organize and manage inside OWS",
+    body: "Control how connected systems are organized, related, and managed within TeamStack OWS, while handling normal day-to-day actions from one place.",
   },
   {
     title: "The question it answers",
-    body: "\u201CWhat is happening across my connected systems, and what direct action do I need to take?\u201D",
+    body: "\u201CWhat is happening across my operations, and how is everything organized and connected inside TeamStack OWS?\u201D",
   },
 ];
 
@@ -51,13 +51,13 @@ function ConsolePage() {
             Console
           </span>
           <h1 className="mx-auto mt-4 max-w-3xl text-3xl font-bold tracking-tight sm:text-4xl">
-            The unified day-to-day operating dashboard
+            One place to view, organize, and manage your operations
           </h1>
           <p className="mx-auto mt-4 max-w-[60ch] text-[16px] leading-relaxed text-muted-foreground">
-            Console is the everyday operating view for the platforms connected to TeamStack OWS. It
-            brings everything into one place so teams can monitor what is happening, understand
-            warnings and status, see billing/usage and access information, and take normal direct
-            actions — without constantly jumping between separate platform dashboards.
+            Console brings your connected platforms together inside TeamStack OWS, giving you one
+            place to see what is happening, organize how systems connect across your Units, review
+            warnings, usage, billing, access, and activity, and manage your day-to-day operations
+            without jumping between separate dashboards.
           </p>
         </section>
 
