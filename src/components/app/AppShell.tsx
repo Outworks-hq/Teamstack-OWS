@@ -238,11 +238,9 @@ function TopBar({ title, subtitle }: { title: string; subtitle?: string }) {
 
 function Frame({ children, activeUnitId }: { children: React.ReactNode; activeUnitId?: string }) {
   return (
-    <div className="min-h-screen bg-canvas p-3 lg:p-6">
-      <div className="mx-auto flex min-h-[calc(100vh-24px)] max-w-[1320px] overflow-hidden rounded-2xl border bg-background shadow-card lg:min-h-[calc(100vh-48px)]">
-        <Sidebar {...(activeUnitId ? { activeUnitId } : {})} />
-        <div className="min-w-0 flex-1">{children}</div>
-      </div>
+    <div className="flex min-h-screen w-full bg-canvas">
+      <Sidebar {...(activeUnitId ? { activeUnitId } : {})} />
+      <div className="min-w-0 flex-1">{children}</div>
     </div>
   );
 }
