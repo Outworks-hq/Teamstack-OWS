@@ -24,6 +24,7 @@ import { Route as AuthenticatedAppWorkspaceRouteImport } from './routes/_authent
 import { Route as AuthenticatedAppWorkspacesRouteImport } from './routes/_authenticated/app.workspaces'
 import { Route as AuthenticatedAppUnitUnitIdRouteImport } from './routes/_authenticated/app.unit.$unitId'
 import { Route as AuthenticatedAppUnitUnitIdIndexRouteImport } from './routes/_authenticated/app.unit.$unitId.index'
+import { Route as AuthenticatedAppUnitUnitIdAccessRouteImport } from './routes/_authenticated/app.unit.$unitId.access'
 import { Route as AuthenticatedAppUnitUnitIdAlertsRouteImport } from './routes/_authenticated/app.unit.$unitId.alerts'
 import { Route as AuthenticatedAppUnitUnitIdControlRoomRouteImport } from './routes/_authenticated/app.unit.$unitId.control-room'
 import { Route as AuthenticatedAppUnitUnitIdFlowsRouteImport } from './routes/_authenticated/app.unit.$unitId.flows'
@@ -109,6 +110,12 @@ const AuthenticatedAppUnitUnitIdIndexRoute =
     path: '/',
     getParentRoute: () => AuthenticatedAppUnitUnitIdRoute,
   } as any)
+const AuthenticatedAppUnitUnitIdAccessRoute =
+  AuthenticatedAppUnitUnitIdAccessRouteImport.update({
+    id: '/access',
+    path: '/access',
+    getParentRoute: () => AuthenticatedAppUnitUnitIdRoute,
+  } as any)
 const AuthenticatedAppUnitUnitIdAlertsRoute =
   AuthenticatedAppUnitUnitIdAlertsRouteImport.update({
     id: '/alerts',
@@ -160,6 +167,7 @@ export interface FileRoutesByFullPath {
   '/app/workspaces': typeof AuthenticatedAppWorkspacesRoute
   '/app/': typeof AuthenticatedAppIndexRoute
   '/app/unit/$unitId': typeof AuthenticatedAppUnitUnitIdRouteWithChildren
+  '/app/unit/$unitId/access': typeof AuthenticatedAppUnitUnitIdAccessRoute
   '/app/unit/$unitId/alerts': typeof AuthenticatedAppUnitUnitIdAlertsRoute
   '/app/unit/$unitId/control-room': typeof AuthenticatedAppUnitUnitIdControlRoomRoute
   '/app/unit/$unitId/flows': typeof AuthenticatedAppUnitUnitIdFlowsRoute
@@ -180,6 +188,7 @@ export interface FileRoutesByTo {
   '/app/workspace': typeof AuthenticatedAppWorkspaceRoute
   '/app/workspaces': typeof AuthenticatedAppWorkspacesRoute
   '/app': typeof AuthenticatedAppIndexRoute
+  '/app/unit/$unitId/access': typeof AuthenticatedAppUnitUnitIdAccessRoute
   '/app/unit/$unitId/alerts': typeof AuthenticatedAppUnitUnitIdAlertsRoute
   '/app/unit/$unitId/control-room': typeof AuthenticatedAppUnitUnitIdControlRoomRoute
   '/app/unit/$unitId/flows': typeof AuthenticatedAppUnitUnitIdFlowsRoute
@@ -203,6 +212,7 @@ export interface FileRoutesById {
   '/_authenticated/app/workspaces': typeof AuthenticatedAppWorkspacesRoute
   '/_authenticated/app/': typeof AuthenticatedAppIndexRoute
   '/_authenticated/app/unit/$unitId': typeof AuthenticatedAppUnitUnitIdRouteWithChildren
+  '/_authenticated/app/unit/$unitId/access': typeof AuthenticatedAppUnitUnitIdAccessRoute
   '/_authenticated/app/unit/$unitId/alerts': typeof AuthenticatedAppUnitUnitIdAlertsRoute
   '/_authenticated/app/unit/$unitId/control-room': typeof AuthenticatedAppUnitUnitIdControlRoomRoute
   '/_authenticated/app/unit/$unitId/flows': typeof AuthenticatedAppUnitUnitIdFlowsRoute
@@ -227,6 +237,7 @@ export interface FileRouteTypes {
     | '/app/workspaces'
     | '/app/'
     | '/app/unit/$unitId'
+    | '/app/unit/$unitId/access'
     | '/app/unit/$unitId/alerts'
     | '/app/unit/$unitId/control-room'
     | '/app/unit/$unitId/flows'
@@ -247,6 +258,7 @@ export interface FileRouteTypes {
     | '/app/workspace'
     | '/app/workspaces'
     | '/app'
+    | '/app/unit/$unitId/access'
     | '/app/unit/$unitId/alerts'
     | '/app/unit/$unitId/control-room'
     | '/app/unit/$unitId/flows'
@@ -269,6 +281,7 @@ export interface FileRouteTypes {
     | '/_authenticated/app/workspaces'
     | '/_authenticated/app/'
     | '/_authenticated/app/unit/$unitId'
+    | '/_authenticated/app/unit/$unitId/access'
     | '/_authenticated/app/unit/$unitId/alerts'
     | '/_authenticated/app/unit/$unitId/control-room'
     | '/_authenticated/app/unit/$unitId/flows'
@@ -394,6 +407,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppUnitUnitIdIndexRouteImport
       parentRoute: typeof AuthenticatedAppUnitUnitIdRoute
     }
+    '/_authenticated/app/unit/$unitId/access': {
+      id: '/_authenticated/app/unit/$unitId/access'
+      path: '/access'
+      fullPath: '/app/unit/$unitId/access'
+      preLoaderRoute: typeof AuthenticatedAppUnitUnitIdAccessRouteImport
+      parentRoute: typeof AuthenticatedAppUnitUnitIdRoute
+    }
     '/_authenticated/app/unit/$unitId/alerts': {
       id: '/_authenticated/app/unit/$unitId/alerts'
       path: '/alerts'
@@ -458,6 +478,7 @@ const AuthenticatedAppUnitUnitIdSystemsRouteWithChildren =
   )
 
 interface AuthenticatedAppUnitUnitIdRouteChildren {
+  AuthenticatedAppUnitUnitIdAccessRoute: typeof AuthenticatedAppUnitUnitIdAccessRoute
   AuthenticatedAppUnitUnitIdAlertsRoute: typeof AuthenticatedAppUnitUnitIdAlertsRoute
   AuthenticatedAppUnitUnitIdControlRoomRoute: typeof AuthenticatedAppUnitUnitIdControlRoomRoute
   AuthenticatedAppUnitUnitIdFlowsRoute: typeof AuthenticatedAppUnitUnitIdFlowsRoute
@@ -467,6 +488,8 @@ interface AuthenticatedAppUnitUnitIdRouteChildren {
 
 const AuthenticatedAppUnitUnitIdRouteChildren: AuthenticatedAppUnitUnitIdRouteChildren =
   {
+    AuthenticatedAppUnitUnitIdAccessRoute:
+      AuthenticatedAppUnitUnitIdAccessRoute,
     AuthenticatedAppUnitUnitIdAlertsRoute:
       AuthenticatedAppUnitUnitIdAlertsRoute,
     AuthenticatedAppUnitUnitIdControlRoomRoute:
