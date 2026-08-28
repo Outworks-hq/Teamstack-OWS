@@ -25,8 +25,8 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   return (
-    <main className="min-h-screen bg-canvas px-3 py-3 lg:px-6 lg:py-6">
-      <div className="mx-auto max-w-[1440px] overflow-hidden rounded-2xl border bg-background shadow-card">
+    <main className="min-h-screen w-full bg-background">
+      <div className="min-h-screen w-full max-w-none overflow-hidden bg-background">
         <SiteNav />
 
         <section className="px-4 pt-8 pb-10 text-center lg:px-16 lg:pt-12">
