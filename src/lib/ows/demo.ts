@@ -194,6 +194,7 @@ function seed(): DemoStore {
     responsible: string | null,
     notes: string,
     integration: string,
+    usage?: { monthly_cost_cents: number; usage_label: string },
   ): SystemRecord => ({
     id: `demo-sys-${key}`,
     workspace_id: WS,
@@ -206,26 +207,27 @@ function seed(): DemoStore {
     status,
     integration_status: integration,
     capabilities: [],
-    config: {},
+    config: usage ? { ...usage } : {},
     responsible_user_id: responsible,
     created_by: DEMO_USER.id,
     created_at: ago(60 * 24 * 70),
   });
 
   const systems: SystemRecord[] = [
-    sys("github", "github", "northwind/web", "demo-unit-infra", "Source control", "https://github.com/", "healthy", "demo-user-2", "Main website repository. Protected main branch, 2 required reviews.", "manual"),
-    sys("vercel", "vercel", "Vercel — northwind.com", "demo-unit-infra", "Hosting", "https://vercel.com/dashboard", "degraded", "demo-user-3", "Edge deploys from main. Last build 6m longer than usual.", "manual"),
-    sys("aws", "aws", "AWS — prod account", "demo-unit-infra", "Cloud infrastructure", "https://console.aws.amazon.com/", "healthy", "demo-user-2", "RDS, S3 media bucket and background workers.", "manual"),
-    sys("cloudflare", "cloudflare", "Cloudflare — DNS & WAF", "demo-unit-infra", "Network", "https://dash.cloudflare.com/", "healthy", "demo-user-3", "DNS, WAF rules and caching for the marketing site.", "manual"),
-    sys("stripe", "stripe", "Stripe — Northwind Payments", "demo-unit-funnel", "Payments", "https://dashboard.stripe.com/", "healthy", "demo-user-4", "Subscriptions plus one-off invoices. Webhooks land in the platform API.", "manual"),
-    sys("crm", "crm", "CRM — pipeline", "demo-unit-funnel", "Customer data", "https://example.com/crm", "healthy", "demo-user-4", "Deal stages synced nightly from the marketing platform.", "manual"),
-    sys("email", "email", "Email platform", "demo-unit-funnel", "Messaging", "https://example.com/email", "maintenance", "demo-user-5", "Lifecycle campaigns. Provider maintenance window Saturday.", "manual"),
-    sys("analytics", "analytics", "Product analytics", "demo-unit-funnel", "Analytics", "https://example.com/analytics", "healthy", "demo-user-5", "Funnel and retention dashboards for the revenue team.", "manual"),
-    sys("gws", "google_workspace", "Google Workspace", "demo-unit-nyc", "Identity & productivity", "https://admin.google.com/", "healthy", "demo-user-3", "Directory of record for staff accounts and shared drives.", "manual"),
-    sys("twilio", "twilio", "Twilio — support line", "demo-unit-nyc", "Communications", "https://console.twilio.com/", "down", "demo-user-3", "Inbound support number and SMS notifications.", "manual"),
-    sys("netlify", "netlify", "Netlify — docs site", "demo-unit-launch", "Hosting", "https://app.netlify.com/", "healthy", "demo-user-4", "Static documentation site for the Q4 launch.", "manual"),
-    sys("custom", "custom", "Internal Ops API", "demo-unit-launch", "Internal service", "https://example.com/ops", "unknown", null, "Small internal service used for launch checklists.", "manual"),
+    sys("github", "github", "northwind/web", "demo-unit-infra", "Source control", "https://github.com/", "healthy", "demo-user-2", "Main website repository. Protected main branch, 2 required reviews.", "manual", { monthly_cost_cents: 34_000, usage_label: "12 seats · 4,200 CI minutes" }),
+    sys("vercel", "vercel", "Vercel — northwind.com", "demo-unit-infra", "Hosting", "https://vercel.com/dashboard", "degraded", "demo-user-3", "Edge deploys from main. Last build 6m longer than usual.", "manual", { monthly_cost_cents: 78_000, usage_label: "1.4 TB bandwidth · 318 deploys" }),
+    sys("aws", "aws", "AWS — prod account", "demo-unit-infra", "Cloud infrastructure", "https://console.aws.amazon.com/", "healthy", "demo-user-2", "RDS, S3 media bucket and background workers.", "manual", { monthly_cost_cents: 268_000, usage_label: "RDS, S3 (2.1 TB), 14 workers" }),
+    sys("cloudflare", "cloudflare", "Cloudflare — DNS & WAF", "demo-unit-infra", "Network", "https://dash.cloudflare.com/", "healthy", "demo-user-3", "DNS, WAF rules and caching for the marketing site.", "manual", { monthly_cost_cents: 48_000, usage_label: "62M requests · 8 WAF rules" }),
+    sys("stripe", "stripe", "Stripe — Northwind Payments", "demo-unit-funnel", "Payments", "https://dashboard.stripe.com/", "healthy", "demo-user-4", "Subscriptions plus one-off invoices. Webhooks land in the platform API.", "manual", { monthly_cost_cents: 142_000, usage_label: "3,180 charges processed" }),
+    sys("crm", "crm", "CRM — pipeline", "demo-unit-funnel", "Customer data", "https://example.com/crm", "healthy", "demo-user-4", "Deal stages synced nightly from the marketing platform.", "manual", { monthly_cost_cents: 61_000, usage_label: "24 seats · 18,400 contacts" }),
+    sys("email", "email", "Email platform", "demo-unit-funnel", "Messaging", "https://example.com/email", "maintenance", "demo-user-5", "Lifecycle campaigns. Provider maintenance window Saturday.", "manual", { monthly_cost_cents: 39_500, usage_label: "412,000 emails sent" }),
+    sys("analytics", "analytics", "Product analytics", "demo-unit-funnel", "Analytics", "https://example.com/analytics", "healthy", "demo-user-5", "Funnel and retention dashboards for the revenue team.", "manual", { monthly_cost_cents: 19_000, usage_label: "6.2M events tracked" }),
+    sys("gws", "google_workspace", "Google Workspace", "demo-unit-nyc", "Identity & productivity", "https://admin.google.com/", "healthy", "demo-user-3", "Directory of record for staff accounts and shared drives.", "manual", { monthly_cost_cents: 64_800, usage_label: "54 staff accounts" }),
+    sys("twilio", "twilio", "Twilio — support line", "demo-unit-nyc", "Communications", "https://console.twilio.com/", "down", "demo-user-3", "Inbound support number and SMS notifications.", "manual", { monthly_cost_cents: 32_600, usage_label: "9,140 minutes · 21,000 SMS" }),
+    sys("netlify", "netlify", "Netlify — docs site", "demo-unit-launch", "Hosting", "https://app.netlify.com/", "healthy", "demo-user-4", "Static documentation site for the Q4 launch.", "manual", { monthly_cost_cents: 19_000, usage_label: "184 GB bandwidth" }),
+    sys("custom", "custom", "Internal Ops API", "demo-unit-launch", "Internal service", "https://example.com/ops", "unknown", null, "Small internal service used for launch checklists.", "manual", { monthly_cost_cents: 23_000, usage_label: "2 containers · 1.1M requests" }),
   ];
+
 
   const flows: Flow[] = [
     {
