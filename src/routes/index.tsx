@@ -1,9 +1,11 @@
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
+import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
 import { CirclePlay } from "lucide-react";
 
 import { DashboardPreview } from "@/components/marketing/DashboardPreview";
 import { SiteNav } from "@/components/marketing/SiteNav";
 import { Button } from "@/components/ui/button";
+import { startDemoMode } from "@/lib/ows/demo";
 
 const TITLE = "TeamStack OWS — One workspace. Every system. Clear control.";
 const DESCRIPTION =

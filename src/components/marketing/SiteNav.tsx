@@ -32,11 +32,8 @@ export function SiteNav() {
       </nav>
 
       <div className="flex items-center gap-2">
-        <Button asChild variant="ghost" size="sm" className="hidden text-[14px] sm:inline-flex">
+        <Button asChild variant="ghost" size="sm" className="text-[14px]">
           <Link to="/auth">Sign in</Link>
-        </Button>
-        <Button asChild className="rounded-lg px-4 text-[14px] font-medium">
-          <Link to="/auth">Book a demo</Link>
         </Button>
       </div>
     </header>
