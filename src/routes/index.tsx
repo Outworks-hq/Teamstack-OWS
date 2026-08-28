@@ -26,6 +26,9 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
   return (
     <main className="min-h-screen w-full bg-background">
       <div className="min-h-screen w-full max-w-none overflow-hidden bg-background">
@@ -49,10 +52,16 @@ function Home() {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-6">
-            <Button asChild size="lg" className="rounded-lg px-6">
-              <Link to="/auth">
-                Book a demo <span aria-hidden="true">→</span>
-              </Link>
+            <Button
+              size="lg"
+              className="rounded-lg px-6"
+              onClick={() => {
+                queryClient.clear();
+                startDemoMode();
+                void navigate({ to: "/app" });
+              }}
+            >
+              View Demo Workspace <span aria-hidden="true">→</span>
             </Button>
             <Link
               to="/product"

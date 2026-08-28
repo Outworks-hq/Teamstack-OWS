@@ -77,7 +77,9 @@ function CreateFirstWorkspace() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-canvas px-4 py-10">
       <div className="w-full max-w-[440px] rounded-2xl border bg-background p-8 shadow-card">
-        <Wordmark />
+        <Link to="/" aria-label="TeamStack OWS home" className="inline-flex">
+          <Wordmark />
+        </Link>
         <h1 className="mt-8 text-2xl font-semibold tracking-tight">Create your Workspace</h1>
         <p className="mt-2 text-[13px] text-muted-foreground">
           A Workspace represents one organization. You become its owner and can create Units,
