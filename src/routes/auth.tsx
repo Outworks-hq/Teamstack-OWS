@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { lovable } from "@/integrations/lovable/index";
 import { supabase } from "@/integrations/supabase/client";
 import { ensureProfile } from "@/lib/ows/data";
-import { exitDemoMode, startDemoMode } from "@/lib/ows/demo";
+import { startDemoMode } from "@/lib/ows/demo";
 
 const TITLE = "Sign in — TeamStack OWS";
 const DESCRIPTION =
@@ -42,8 +42,6 @@ function AuthPage() {
   const [notice, setNotice] = useState<string | null>(null);
 
   useEffect(() => {
-    // Landing on the sign-in page always leaves demo mode behind.
-    exitDemoMode();
     void supabase.auth.getUser().then(({ data }) => {
       if (data.user) void navigate({ to: "/app/console", replace: true });
     });
