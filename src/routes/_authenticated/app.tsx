@@ -15,7 +15,11 @@ export const Route = createFileRoute("/_authenticated/app")({
 });
 
 function AppLayout() {
-  const { loading, userId, email } = useAuthUser();
+  const auth = useAuthUser();
+  const demoMode = isDemoMode();
+  const loading = demoMode ? false : auth.loading;
+  const userId = demoMode ? DEMO_USER.id : auth.userId;
+  const email = demoMode ? DEMO_USER.email : auth.email;
 
   if (loading || !userId) {
     return (
