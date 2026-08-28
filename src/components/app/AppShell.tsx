@@ -120,7 +120,7 @@ function Sidebar({ activeUnitId }: { activeUnitId?: string }) {
   return (
     <aside className="flex w-[248px] shrink-0 flex-col border-r bg-muted/20">
       <div className="px-4 py-4">
-        <Link to="/app/workspace" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2" aria-label="TeamStack OWS home">
           <LogoMark className="size-5" />
           <span className="text-[14px] font-semibold tracking-tight">
             TeamStack <span className="font-normal text-muted-foreground">OWS</span>
