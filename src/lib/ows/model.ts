@@ -97,6 +97,37 @@ export function formatMoney(cents: number, currency = "USD"): string {
   return new Intl.NumberFormat("en-US", { style: "currency", currency }).format(cents / 100);
 }
 
+/**
+ * Usage reported by one connected platform. Costs live on the system's own
+ * config (`monthly_cost_cents` / `usage_label`) because a Unit's spend is the
+ * spend of the platforms connected to it — not a workspace billing record.
+ */
+export interface PlatformUsage {
+  systemId: string;
+  name: string;
+  provider: string;
+  cents: number | null;
+  detail: string | null;
+}
+
+export function platformUsage(systems: SystemRecord[]): {
+  items: PlatformUsage[];
+  total: number;
+  reported: number;
+} {
+  const items = systems.map((system) => {
+    const config = (system.config ?? {}) as Record<string, unknown>;
+    const cents = typeof config["monthly_cost_cents"] === "number" ? config["monthly_cost_cents"] : null;
+    const detail = typeof config["usage_label"] === "string" ? config["usage_label"] : null;
+    return { systemId: system.id, name: system.name, provider: system.provider, cents, detail };
+  });
+  items.sort((a, b) => (b.cents ?? -1) - (a.cents ?? -1));
+  const reported = items.filter((i) => i.cents !== null).length;
+  const total = items.reduce((sum, i) => sum + (i.cents ?? 0), 0);
+  return { items, total, reported };
+}
+
+
 export function timeAgo(iso: string): string {
   const diff = Date.now() - new Date(iso).getTime();
   const mins = Math.round(diff / 60000);
