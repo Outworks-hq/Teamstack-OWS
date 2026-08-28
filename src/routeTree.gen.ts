@@ -16,6 +16,8 @@ import { Route as AuthenticatedAppRouteImport } from './routes/_authenticated/ap
 import { Route as AuthenticatedAppIndexRouteImport } from './routes/_authenticated/app.index'
 import { Route as AuthenticatedAppConsoleRouteImport } from './routes/_authenticated/app.console'
 import { Route as AuthenticatedAppControlRoomRouteImport } from './routes/_authenticated/app.control-room'
+import { Route as AuthenticatedAppSystemsRouteImport } from './routes/_authenticated/app.systems'
+import { Route as AuthenticatedAppSystemsSystemIdRouteImport } from './routes/_authenticated/app.systems.$systemId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +54,17 @@ const AuthenticatedAppControlRoomRoute =
     path: '/control-room',
     getParentRoute: () => AuthenticatedAppRoute,
   } as any)
+const AuthenticatedAppSystemsRoute = AuthenticatedAppSystemsRouteImport.update({
+  id: '/systems',
+  path: '/systems',
+  getParentRoute: () => AuthenticatedAppRoute,
+} as any)
+const AuthenticatedAppSystemsSystemIdRoute =
+  AuthenticatedAppSystemsSystemIdRouteImport.update({
+    id: '/$systemId',
+    path: '/$systemId',
+    getParentRoute: () => AuthenticatedAppSystemsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -59,14 +72,18 @@ export interface FileRoutesByFullPath {
   '/app': typeof AuthenticatedAppRouteWithChildren
   '/app/console': typeof AuthenticatedAppConsoleRoute
   '/app/control-room': typeof AuthenticatedAppControlRoomRoute
+  '/app/systems': typeof AuthenticatedAppSystemsRouteWithChildren
   '/app/': typeof AuthenticatedAppIndexRoute
+  '/app/systems/$systemId': typeof AuthenticatedAppSystemsSystemIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/app/console': typeof AuthenticatedAppConsoleRoute
   '/app/control-room': typeof AuthenticatedAppControlRoomRoute
+  '/app/systems': typeof AuthenticatedAppSystemsRouteWithChildren
   '/app': typeof AuthenticatedAppIndexRoute
+  '/app/systems/$systemId': typeof AuthenticatedAppSystemsSystemIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -76,14 +93,30 @@ export interface FileRoutesById {
   '/_authenticated/app': typeof AuthenticatedAppRouteWithChildren
   '/_authenticated/app/console': typeof AuthenticatedAppConsoleRoute
   '/_authenticated/app/control-room': typeof AuthenticatedAppControlRoomRoute
+  '/_authenticated/app/systems': typeof AuthenticatedAppSystemsRouteWithChildren
   '/_authenticated/app/': typeof AuthenticatedAppIndexRoute
+  '/_authenticated/app/systems/$systemId': typeof AuthenticatedAppSystemsSystemIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/auth' | '/app' | '/app/console' | '/app/control-room' | '/app/'
+    | '/'
+    | '/auth'
+    | '/app'
+    | '/app/console'
+    | '/app/control-room'
+    | '/app/systems'
+    | '/app/'
+    | '/app/systems/$systemId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/app/console' | '/app/control-room' | '/app'
+  to:
+    | '/'
+    | '/auth'
+    | '/app/console'
+    | '/app/control-room'
+    | '/app/systems'
+    | '/app'
+    | '/app/systems/$systemId'
   id:
     | '__root__'
     | '/'
@@ -92,7 +125,9 @@ export interface FileRouteTypes {
     | '/_authenticated/app'
     | '/_authenticated/app/console'
     | '/_authenticated/app/control-room'
+    | '/_authenticated/app/systems'
     | '/_authenticated/app/'
+    | '/_authenticated/app/systems/$systemId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -152,18 +187,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppControlRoomRouteImport
       parentRoute: typeof AuthenticatedAppRoute
     }
+    '/_authenticated/app/systems': {
+      id: '/_authenticated/app/systems'
+      path: '/systems'
+      fullPath: '/app/systems'
+      preLoaderRoute: typeof AuthenticatedAppSystemsRouteImport
+      parentRoute: typeof AuthenticatedAppRoute
+    }
+    '/_authenticated/app/systems/$systemId': {
+      id: '/_authenticated/app/systems/$systemId'
+      path: '/$systemId'
+      fullPath: '/app/systems/$systemId'
+      preLoaderRoute: typeof AuthenticatedAppSystemsSystemIdRouteImport
+      parentRoute: typeof AuthenticatedAppSystemsRoute
+    }
   }
 }
+
+interface AuthenticatedAppSystemsRouteChildren {
+  AuthenticatedAppSystemsSystemIdRoute: typeof AuthenticatedAppSystemsSystemIdRoute
+}
+
+const AuthenticatedAppSystemsRouteChildren: AuthenticatedAppSystemsRouteChildren =
+  {
+    AuthenticatedAppSystemsSystemIdRoute: AuthenticatedAppSystemsSystemIdRoute,
+  }
+
+const AuthenticatedAppSystemsRouteWithChildren =
+  AuthenticatedAppSystemsRoute._addFileChildren(
+    AuthenticatedAppSystemsRouteChildren,
+  )
 
 interface AuthenticatedAppRouteChildren {
   AuthenticatedAppConsoleRoute: typeof AuthenticatedAppConsoleRoute
   AuthenticatedAppControlRoomRoute: typeof AuthenticatedAppControlRoomRoute
+  AuthenticatedAppSystemsRoute: typeof AuthenticatedAppSystemsRouteWithChildren
   AuthenticatedAppIndexRoute: typeof AuthenticatedAppIndexRoute
 }
 
 const AuthenticatedAppRouteChildren: AuthenticatedAppRouteChildren = {
   AuthenticatedAppConsoleRoute: AuthenticatedAppConsoleRoute,
   AuthenticatedAppControlRoomRoute: AuthenticatedAppControlRoomRoute,
+  AuthenticatedAppSystemsRoute: AuthenticatedAppSystemsRouteWithChildren,
   AuthenticatedAppIndexRoute: AuthenticatedAppIndexRoute,
 }
 
