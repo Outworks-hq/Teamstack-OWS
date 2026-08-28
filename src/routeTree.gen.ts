@@ -26,6 +26,7 @@ import { Route as AuthenticatedAppUnitUnitIdRouteImport } from './routes/_authen
 import { Route as AuthenticatedAppUnitUnitIdIndexRouteImport } from './routes/_authenticated/app.unit.$unitId.index'
 import { Route as AuthenticatedAppUnitUnitIdAccessRouteImport } from './routes/_authenticated/app.unit.$unitId.access'
 import { Route as AuthenticatedAppUnitUnitIdAlertsRouteImport } from './routes/_authenticated/app.unit.$unitId.alerts'
+import { Route as AuthenticatedAppUnitUnitIdBillingRouteImport } from './routes/_authenticated/app.unit.$unitId.billing'
 import { Route as AuthenticatedAppUnitUnitIdControlRoomRouteImport } from './routes/_authenticated/app.unit.$unitId.control-room'
 import { Route as AuthenticatedAppUnitUnitIdFlowsRouteImport } from './routes/_authenticated/app.unit.$unitId.flows'
 import { Route as AuthenticatedAppUnitUnitIdSystemsRouteImport } from './routes/_authenticated/app.unit.$unitId.systems'
@@ -122,6 +123,12 @@ const AuthenticatedAppUnitUnitIdAlertsRoute =
     path: '/alerts',
     getParentRoute: () => AuthenticatedAppUnitUnitIdRoute,
   } as any)
+const AuthenticatedAppUnitUnitIdBillingRoute =
+  AuthenticatedAppUnitUnitIdBillingRouteImport.update({
+    id: '/billing',
+    path: '/billing',
+    getParentRoute: () => AuthenticatedAppUnitUnitIdRoute,
+  } as any)
 const AuthenticatedAppUnitUnitIdControlRoomRoute =
   AuthenticatedAppUnitUnitIdControlRoomRouteImport.update({
     id: '/control-room',
@@ -169,6 +176,7 @@ export interface FileRoutesByFullPath {
   '/app/unit/$unitId': typeof AuthenticatedAppUnitUnitIdRouteWithChildren
   '/app/unit/$unitId/access': typeof AuthenticatedAppUnitUnitIdAccessRoute
   '/app/unit/$unitId/alerts': typeof AuthenticatedAppUnitUnitIdAlertsRoute
+  '/app/unit/$unitId/billing': typeof AuthenticatedAppUnitUnitIdBillingRoute
   '/app/unit/$unitId/control-room': typeof AuthenticatedAppUnitUnitIdControlRoomRoute
   '/app/unit/$unitId/flows': typeof AuthenticatedAppUnitUnitIdFlowsRoute
   '/app/unit/$unitId/systems': typeof AuthenticatedAppUnitUnitIdSystemsRouteWithChildren
@@ -190,6 +198,7 @@ export interface FileRoutesByTo {
   '/app': typeof AuthenticatedAppIndexRoute
   '/app/unit/$unitId/access': typeof AuthenticatedAppUnitUnitIdAccessRoute
   '/app/unit/$unitId/alerts': typeof AuthenticatedAppUnitUnitIdAlertsRoute
+  '/app/unit/$unitId/billing': typeof AuthenticatedAppUnitUnitIdBillingRoute
   '/app/unit/$unitId/control-room': typeof AuthenticatedAppUnitUnitIdControlRoomRoute
   '/app/unit/$unitId/flows': typeof AuthenticatedAppUnitUnitIdFlowsRoute
   '/app/unit/$unitId': typeof AuthenticatedAppUnitUnitIdIndexRoute
@@ -214,6 +223,7 @@ export interface FileRoutesById {
   '/_authenticated/app/unit/$unitId': typeof AuthenticatedAppUnitUnitIdRouteWithChildren
   '/_authenticated/app/unit/$unitId/access': typeof AuthenticatedAppUnitUnitIdAccessRoute
   '/_authenticated/app/unit/$unitId/alerts': typeof AuthenticatedAppUnitUnitIdAlertsRoute
+  '/_authenticated/app/unit/$unitId/billing': typeof AuthenticatedAppUnitUnitIdBillingRoute
   '/_authenticated/app/unit/$unitId/control-room': typeof AuthenticatedAppUnitUnitIdControlRoomRoute
   '/_authenticated/app/unit/$unitId/flows': typeof AuthenticatedAppUnitUnitIdFlowsRoute
   '/_authenticated/app/unit/$unitId/systems': typeof AuthenticatedAppUnitUnitIdSystemsRouteWithChildren
@@ -239,6 +249,7 @@ export interface FileRouteTypes {
     | '/app/unit/$unitId'
     | '/app/unit/$unitId/access'
     | '/app/unit/$unitId/alerts'
+    | '/app/unit/$unitId/billing'
     | '/app/unit/$unitId/control-room'
     | '/app/unit/$unitId/flows'
     | '/app/unit/$unitId/systems'
@@ -260,6 +271,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/app/unit/$unitId/access'
     | '/app/unit/$unitId/alerts'
+    | '/app/unit/$unitId/billing'
     | '/app/unit/$unitId/control-room'
     | '/app/unit/$unitId/flows'
     | '/app/unit/$unitId'
@@ -283,6 +295,7 @@ export interface FileRouteTypes {
     | '/_authenticated/app/unit/$unitId'
     | '/_authenticated/app/unit/$unitId/access'
     | '/_authenticated/app/unit/$unitId/alerts'
+    | '/_authenticated/app/unit/$unitId/billing'
     | '/_authenticated/app/unit/$unitId/control-room'
     | '/_authenticated/app/unit/$unitId/flows'
     | '/_authenticated/app/unit/$unitId/systems'
@@ -421,6 +434,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppUnitUnitIdAlertsRouteImport
       parentRoute: typeof AuthenticatedAppUnitUnitIdRoute
     }
+    '/_authenticated/app/unit/$unitId/billing': {
+      id: '/_authenticated/app/unit/$unitId/billing'
+      path: '/billing'
+      fullPath: '/app/unit/$unitId/billing'
+      preLoaderRoute: typeof AuthenticatedAppUnitUnitIdBillingRouteImport
+      parentRoute: typeof AuthenticatedAppUnitUnitIdRoute
+    }
     '/_authenticated/app/unit/$unitId/control-room': {
       id: '/_authenticated/app/unit/$unitId/control-room'
       path: '/control-room'
@@ -480,6 +500,7 @@ const AuthenticatedAppUnitUnitIdSystemsRouteWithChildren =
 interface AuthenticatedAppUnitUnitIdRouteChildren {
   AuthenticatedAppUnitUnitIdAccessRoute: typeof AuthenticatedAppUnitUnitIdAccessRoute
   AuthenticatedAppUnitUnitIdAlertsRoute: typeof AuthenticatedAppUnitUnitIdAlertsRoute
+  AuthenticatedAppUnitUnitIdBillingRoute: typeof AuthenticatedAppUnitUnitIdBillingRoute
   AuthenticatedAppUnitUnitIdControlRoomRoute: typeof AuthenticatedAppUnitUnitIdControlRoomRoute
   AuthenticatedAppUnitUnitIdFlowsRoute: typeof AuthenticatedAppUnitUnitIdFlowsRoute
   AuthenticatedAppUnitUnitIdSystemsRoute: typeof AuthenticatedAppUnitUnitIdSystemsRouteWithChildren
@@ -492,6 +513,8 @@ const AuthenticatedAppUnitUnitIdRouteChildren: AuthenticatedAppUnitUnitIdRouteCh
       AuthenticatedAppUnitUnitIdAccessRoute,
     AuthenticatedAppUnitUnitIdAlertsRoute:
       AuthenticatedAppUnitUnitIdAlertsRoute,
+    AuthenticatedAppUnitUnitIdBillingRoute:
+      AuthenticatedAppUnitUnitIdBillingRoute,
     AuthenticatedAppUnitUnitIdControlRoomRoute:
       AuthenticatedAppUnitUnitIdControlRoomRoute,
     AuthenticatedAppUnitUnitIdFlowsRoute: AuthenticatedAppUnitUnitIdFlowsRoute,
