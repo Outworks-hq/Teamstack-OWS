@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-export function LogoMark({ className }: { className?: string }) {
+export function LogoMark({ className }: { className?: string | undefined }) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -32,7 +32,7 @@ export function LogoMark({ className }: { className?: string }) {
   );
 }
 
-export function Wordmark({ className, markClassName }: { className?: string; markClassName?: string }) {
+export function Wordmark({ className, markClassName }: { className?: string | undefined; markClassName?: string | undefined }) {
   return (
     <span className={cn("flex items-center gap-2", className)}>
       <LogoMark className={markClassName} />
