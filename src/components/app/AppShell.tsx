@@ -271,7 +271,7 @@ const UNIT_NAV = [
 const UNIT_MORE = [
   { label: "Alerts", to: "/app/unit/$unitId/alerts" as const, icon: Bell },
   { label: "Access", to: "/app/unit/$unitId/access" as const, icon: KeyRound },
-  { label: "Usage & billing", to: "/app/unit/$unitId/billing" as const, icon: Receipt },
+  { label: "Usage", to: "/app/unit/$unitId/billing" as const, icon: Receipt },
   { label: "Actions", to: "/app/unit/$unitId/actions" as const, icon: Zap },
 ];
 
@@ -283,22 +283,22 @@ export function UnitShell({ unit, children }: { unit: Unit; children: React.Reac
     <Frame activeUnitId={unit.id}>
       <TopBar title={unit.name} subtitle={`Unit in ${workspace?.name ?? "this workspace"}`} />
 
-      <nav className="flex items-center gap-1 overflow-x-auto border-b px-5 lg:px-8">
+      <nav className="flex items-center justify-center gap-2 border-b px-5 py-2.5 lg:px-8">
         {UNIT_NAV.map((item) => (
           <Link
             key={item.label}
             to={item.to}
             params={{ unitId: unit.id }}
             activeOptions={{ exact: item.exact ?? false }}
-            className="shrink-0 border-b-2 border-transparent px-3 py-3 text-[13px] whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground"
-            activeProps={{ className: "border-brand text-foreground font-medium" }}
+            className="shrink-0 rounded-full px-3.5 py-1.5 text-[13px] whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground"
+            activeProps={{ className: "bg-brand/10 text-brand font-medium" }}
           >
             {item.label}
           </Link>
         ))}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className="ml-auto shrink-0 px-3 py-3 text-[13px] text-muted-foreground transition-colors hover:text-foreground">
+            <button className="shrink-0 rounded-full px-3.5 py-1.5 text-[13px] text-muted-foreground transition-colors hover:text-foreground">
               More
             </button>
           </DropdownMenuTrigger>
@@ -313,6 +313,7 @@ export function UnitShell({ unit, children }: { unit: Unit; children: React.Reac
           </DropdownMenuContent>
         </DropdownMenu>
       </nav>
+
 
       <div className="px-5 py-8 lg:px-8">{children}</div>
     </Frame>

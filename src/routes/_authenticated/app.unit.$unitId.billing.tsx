@@ -2,68 +2,56 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { ExternalLink } from "lucide-react";
 
 import { EmptyState, PageHeader, Panel } from "@/components/app/AppShell";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { formatMoney } from "@/lib/ows/model";
+import { ProviderMark } from "@/components/brand/ProviderMark";
+import { formatMoney, platformUsage } from "@/lib/ows/model";
 import { useUnit } from "@/lib/ows/unit";
-import { useWorkspace } from "@/lib/ows/workspace";
 
 export const Route = createFileRoute("/_authenticated/app/unit/$unitId/billing")({
-  component: UnitBilling,
+  component: UnitUsage,
 });
 
-function UnitBilling() {
-  const { unit, billing, systems } = useUnit();
-  const { workspace, profileName } = useWorkspace();
-
-  const central = workspace?.billing_mode === "central";
-  const total = billing.reduce((sum, record) => sum + record.amount_cents, 0);
+function UnitUsage() {
+  const { unit, systems } = useUnit();
+  const usage = platformUsage(systems);
 
   return (
-    <div>
+    <div className="mx-auto max-w-[1240px]">
       <PageHeader
-        title="Usage & billing"
-        description={
-          central
-            ? `${workspace?.name} pays centrally for every Unit. This is what ${unit.name} uses.`
-            : `${unit.name} is billed on its own.`
-        }
+        title="Usage"
+        description={`What the platforms connected to ${unit.name} are using and costing this month. Organization-wide billing lives under Workspace billing.`}
       />
 
       <div className="grid gap-4 lg:grid-cols-3">
-        <Panel title="This Unit">
-          <p className="text-2xl font-semibold tracking-tight">{formatMoney(total)}</p>
+        <Panel title="This month">
+          <p className="text-2xl font-semibold tracking-tight">
+            {usage.reported > 0 ? formatMoney(usage.total) : "—"}
+          </p>
           <p className="mt-1 text-[12px] text-muted-foreground">
-            across {billing.length} {billing.length === 1 ? "record" : "records"}
+            across {usage.reported} connected {usage.reported === 1 ? "platform" : "platforms"}
           </p>
           <p className="mt-4 text-[13px] text-muted-foreground">
-            {systems.length} connected {systems.length === 1 ? "system" : "systems"} in this Unit.
+            {systems.length} {systems.length === 1 ? "system is" : "systems are"} connected to this
+            Unit.
           </p>
         </Panel>
 
-        <Panel title="Records" className="lg:col-span-2">
-          {billing.length === 0 ? (
-            <EmptyState>No usage recorded for this Unit yet.</EmptyState>
+        <Panel title="By connected platform" className="lg:col-span-2">
+          {systems.length === 0 ? (
+            <EmptyState>No systems are connected to this Unit yet.</EmptyState>
           ) : (
             <ul className="divide-y">
-              {billing.map((record) => (
-                <li key={record.id} className="flex items-center gap-3 py-3 first:pt-0">
+              {usage.items.map((item) => (
+                <li key={item.systemId} className="flex items-center gap-3 py-3 first:pt-0">
+                  <ProviderMark providerId={item.provider} />
                   <div className="min-w-0 flex-1">
-                    <p className="text-[13px] font-medium">
-                      {new Date(record.period_start).toLocaleDateString(undefined, {
-                        month: "long",
-                        year: "numeric",
-                      })}
-                    </p>
-                    <p className="text-[11px] text-muted-foreground">
-                      paid by {central ? workspace?.name : profileName(record.payer_user_id)}
+                    <p className="truncate text-[13px] font-medium">{item.name}</p>
+                    <p className="truncate text-[11px] text-muted-foreground">
+                      {item.detail ?? "No usage reported yet"}
                     </p>
                   </div>
-                  <Badge variant={record.status === "paid" ? "secondary" : "outline"}>
-                    {record.status}
-                  </Badge>
                   <span className="w-24 shrink-0 text-right text-[13px]">
-                    {formatMoney(record.amount_cents, record.currency)}
+                    {item.cents === null ? "—" : formatMoney(item.cents)}
                   </span>
                 </li>
               ))}
@@ -71,7 +59,7 @@ function UnitBilling() {
           )}
           <Button asChild variant="outline" size="sm" className="mt-4">
             <Link to="/app/billing">
-              Organization billing <ExternalLink className="size-3.5" />
+              Workspace billing <ExternalLink className="size-3.5" />
             </Link>
           </Button>
         </Panel>
