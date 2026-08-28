@@ -25,6 +25,7 @@ import { Route as AuthenticatedAppWorkspacesRouteImport } from './routes/_authen
 import { Route as AuthenticatedAppUnitUnitIdRouteImport } from './routes/_authenticated/app.unit.$unitId'
 import { Route as AuthenticatedAppUnitUnitIdIndexRouteImport } from './routes/_authenticated/app.unit.$unitId.index'
 import { Route as AuthenticatedAppUnitUnitIdAccessRouteImport } from './routes/_authenticated/app.unit.$unitId.access'
+import { Route as AuthenticatedAppUnitUnitIdActionsRouteImport } from './routes/_authenticated/app.unit.$unitId.actions'
 import { Route as AuthenticatedAppUnitUnitIdAlertsRouteImport } from './routes/_authenticated/app.unit.$unitId.alerts'
 import { Route as AuthenticatedAppUnitUnitIdBillingRouteImport } from './routes/_authenticated/app.unit.$unitId.billing'
 import { Route as AuthenticatedAppUnitUnitIdControlRoomRouteImport } from './routes/_authenticated/app.unit.$unitId.control-room'
@@ -117,6 +118,12 @@ const AuthenticatedAppUnitUnitIdAccessRoute =
     path: '/access',
     getParentRoute: () => AuthenticatedAppUnitUnitIdRoute,
   } as any)
+const AuthenticatedAppUnitUnitIdActionsRoute =
+  AuthenticatedAppUnitUnitIdActionsRouteImport.update({
+    id: '/actions',
+    path: '/actions',
+    getParentRoute: () => AuthenticatedAppUnitUnitIdRoute,
+  } as any)
 const AuthenticatedAppUnitUnitIdAlertsRoute =
   AuthenticatedAppUnitUnitIdAlertsRouteImport.update({
     id: '/alerts',
@@ -175,6 +182,7 @@ export interface FileRoutesByFullPath {
   '/app/': typeof AuthenticatedAppIndexRoute
   '/app/unit/$unitId': typeof AuthenticatedAppUnitUnitIdRouteWithChildren
   '/app/unit/$unitId/access': typeof AuthenticatedAppUnitUnitIdAccessRoute
+  '/app/unit/$unitId/actions': typeof AuthenticatedAppUnitUnitIdActionsRoute
   '/app/unit/$unitId/alerts': typeof AuthenticatedAppUnitUnitIdAlertsRoute
   '/app/unit/$unitId/billing': typeof AuthenticatedAppUnitUnitIdBillingRoute
   '/app/unit/$unitId/control-room': typeof AuthenticatedAppUnitUnitIdControlRoomRoute
@@ -197,6 +205,7 @@ export interface FileRoutesByTo {
   '/app/workspaces': typeof AuthenticatedAppWorkspacesRoute
   '/app': typeof AuthenticatedAppIndexRoute
   '/app/unit/$unitId/access': typeof AuthenticatedAppUnitUnitIdAccessRoute
+  '/app/unit/$unitId/actions': typeof AuthenticatedAppUnitUnitIdActionsRoute
   '/app/unit/$unitId/alerts': typeof AuthenticatedAppUnitUnitIdAlertsRoute
   '/app/unit/$unitId/billing': typeof AuthenticatedAppUnitUnitIdBillingRoute
   '/app/unit/$unitId/control-room': typeof AuthenticatedAppUnitUnitIdControlRoomRoute
@@ -222,6 +231,7 @@ export interface FileRoutesById {
   '/_authenticated/app/': typeof AuthenticatedAppIndexRoute
   '/_authenticated/app/unit/$unitId': typeof AuthenticatedAppUnitUnitIdRouteWithChildren
   '/_authenticated/app/unit/$unitId/access': typeof AuthenticatedAppUnitUnitIdAccessRoute
+  '/_authenticated/app/unit/$unitId/actions': typeof AuthenticatedAppUnitUnitIdActionsRoute
   '/_authenticated/app/unit/$unitId/alerts': typeof AuthenticatedAppUnitUnitIdAlertsRoute
   '/_authenticated/app/unit/$unitId/billing': typeof AuthenticatedAppUnitUnitIdBillingRoute
   '/_authenticated/app/unit/$unitId/control-room': typeof AuthenticatedAppUnitUnitIdControlRoomRoute
@@ -248,6 +258,7 @@ export interface FileRouteTypes {
     | '/app/'
     | '/app/unit/$unitId'
     | '/app/unit/$unitId/access'
+    | '/app/unit/$unitId/actions'
     | '/app/unit/$unitId/alerts'
     | '/app/unit/$unitId/billing'
     | '/app/unit/$unitId/control-room'
@@ -270,6 +281,7 @@ export interface FileRouteTypes {
     | '/app/workspaces'
     | '/app'
     | '/app/unit/$unitId/access'
+    | '/app/unit/$unitId/actions'
     | '/app/unit/$unitId/alerts'
     | '/app/unit/$unitId/billing'
     | '/app/unit/$unitId/control-room'
@@ -294,6 +306,7 @@ export interface FileRouteTypes {
     | '/_authenticated/app/'
     | '/_authenticated/app/unit/$unitId'
     | '/_authenticated/app/unit/$unitId/access'
+    | '/_authenticated/app/unit/$unitId/actions'
     | '/_authenticated/app/unit/$unitId/alerts'
     | '/_authenticated/app/unit/$unitId/billing'
     | '/_authenticated/app/unit/$unitId/control-room'
@@ -427,6 +440,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppUnitUnitIdAccessRouteImport
       parentRoute: typeof AuthenticatedAppUnitUnitIdRoute
     }
+    '/_authenticated/app/unit/$unitId/actions': {
+      id: '/_authenticated/app/unit/$unitId/actions'
+      path: '/actions'
+      fullPath: '/app/unit/$unitId/actions'
+      preLoaderRoute: typeof AuthenticatedAppUnitUnitIdActionsRouteImport
+      parentRoute: typeof AuthenticatedAppUnitUnitIdRoute
+    }
     '/_authenticated/app/unit/$unitId/alerts': {
       id: '/_authenticated/app/unit/$unitId/alerts'
       path: '/alerts'
@@ -499,6 +519,7 @@ const AuthenticatedAppUnitUnitIdSystemsRouteWithChildren =
 
 interface AuthenticatedAppUnitUnitIdRouteChildren {
   AuthenticatedAppUnitUnitIdAccessRoute: typeof AuthenticatedAppUnitUnitIdAccessRoute
+  AuthenticatedAppUnitUnitIdActionsRoute: typeof AuthenticatedAppUnitUnitIdActionsRoute
   AuthenticatedAppUnitUnitIdAlertsRoute: typeof AuthenticatedAppUnitUnitIdAlertsRoute
   AuthenticatedAppUnitUnitIdBillingRoute: typeof AuthenticatedAppUnitUnitIdBillingRoute
   AuthenticatedAppUnitUnitIdControlRoomRoute: typeof AuthenticatedAppUnitUnitIdControlRoomRoute
@@ -511,6 +532,8 @@ const AuthenticatedAppUnitUnitIdRouteChildren: AuthenticatedAppUnitUnitIdRouteCh
   {
     AuthenticatedAppUnitUnitIdAccessRoute:
       AuthenticatedAppUnitUnitIdAccessRoute,
+    AuthenticatedAppUnitUnitIdActionsRoute:
+      AuthenticatedAppUnitUnitIdActionsRoute,
     AuthenticatedAppUnitUnitIdAlertsRoute:
       AuthenticatedAppUnitUnitIdAlertsRoute,
     AuthenticatedAppUnitUnitIdBillingRoute:

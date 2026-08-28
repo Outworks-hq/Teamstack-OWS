@@ -43,7 +43,7 @@ function AuthPage() {
 
   useEffect(() => {
     void supabase.auth.getUser().then(({ data }) => {
-      if (data.user) void navigate({ to: "/app/console", replace: true });
+      if (data.user) void navigate({ to: "/app", replace: true });
     });
   }, [navigate]);
 
@@ -56,7 +56,7 @@ function AuthPage() {
       name: (data.user.user_metadata?.["full_name"] as string | undefined) ?? undefined,
     });
     await router.invalidate();
-    void navigate({ to: "/app/console", replace: true });
+    void navigate({ to: "/app", replace: true });
   }
 
   async function onSubmit(event: React.FormEvent) {
@@ -176,7 +176,7 @@ function AuthPage() {
             onClick={() => {
               queryClient.clear();
               startDemoMode();
-              void navigate({ to: "/app/console", replace: true });
+              void navigate({ to: "/app", replace: true });
             }}
           >
             View Demo Workspace
