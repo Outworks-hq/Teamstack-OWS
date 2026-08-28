@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ConsoleRouteImport } from './routes/console'
+import { Route as ControlRoomRouteImport } from './routes/control-room'
 import { Route as IntegrationsRouteImport } from './routes/integrations'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ProductRouteImport } from './routes/product'
@@ -46,6 +48,16 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConsoleRoute = ConsoleRouteImport.update({
+  id: '/console',
+  path: '/console',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ControlRoomRoute = ControlRoomRouteImport.update({
+  id: '/control-room',
+  path: '/control-room',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IntegrationsRoute = IntegrationsRouteImport.update({
@@ -170,6 +182,8 @@ const AuthenticatedAppUnitUnitIdSystemsSystemIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/console': typeof ConsoleRoute
+  '/control-room': typeof ControlRoomRoute
   '/integrations': typeof IntegrationsRoute
   '/pricing': typeof PricingRoute
   '/product': typeof ProductRoute
@@ -195,6 +209,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/console': typeof ConsoleRoute
+  '/control-room': typeof ControlRoomRoute
   '/integrations': typeof IntegrationsRoute
   '/pricing': typeof PricingRoute
   '/product': typeof ProductRoute
@@ -219,6 +235,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/console': typeof ConsoleRoute
+  '/control-room': typeof ControlRoomRoute
   '/integrations': typeof IntegrationsRoute
   '/pricing': typeof PricingRoute
   '/product': typeof ProductRoute
@@ -246,6 +264,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/console'
+    | '/control-room'
     | '/integrations'
     | '/pricing'
     | '/product'
@@ -271,6 +291,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/console'
+    | '/control-room'
     | '/integrations'
     | '/pricing'
     | '/product'
@@ -294,6 +316,8 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/console'
+    | '/control-room'
     | '/integrations'
     | '/pricing'
     | '/product'
@@ -321,6 +345,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  ConsoleRoute: typeof ConsoleRoute
+  ControlRoomRoute: typeof ControlRoomRoute
   IntegrationsRoute: typeof IntegrationsRoute
   PricingRoute: typeof PricingRoute
   ProductRoute: typeof ProductRoute
@@ -347,6 +373,20 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/console': {
+      id: '/console'
+      path: '/console'
+      fullPath: '/console'
+      preLoaderRoute: typeof ConsoleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/control-room': {
+      id: '/control-room'
+      path: '/control-room'
+      fullPath: '/control-room'
+      preLoaderRoute: typeof ControlRoomRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/integrations': {
@@ -589,6 +629,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  ConsoleRoute: ConsoleRoute,
+  ControlRoomRoute: ControlRoomRoute,
   IntegrationsRoute: IntegrationsRoute,
   PricingRoute: PricingRoute,
   ProductRoute: ProductRoute,
