@@ -179,7 +179,7 @@ function ConsolePage() {
               return (
                 <li key={system.id}>
                   <a
-                    href={system.external_url ?? provider.docsUrl || "#"}
+                    href={system.external_url || provider.docsUrl || "#"}
                     target="_blank"
                     rel="noreferrer noopener"
                     className="flex items-center gap-2 rounded-lg border px-2.5 py-2 text-[12px] hover:bg-accent"
