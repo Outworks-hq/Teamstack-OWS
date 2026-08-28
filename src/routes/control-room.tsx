@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 const TITLE = "Control Room — TeamStack OWS";
 const DESCRIPTION =
-  "Control Room is where teams create and manage operations that work across their connected platforms — rules, automations, flows, and coordinated actions between systems.";
+  "Control Room uses the integrations already connected to TeamStack OWS to run actions, rules, workflows, and automations across those platforms. It can connect one platform’s API to another, trigger actions between systems, and automate operations both across external platforms and within TeamStack OWS.";
 
 export const Route = createFileRoute("/control-room")({
   head: () => ({
@@ -24,19 +24,19 @@ export const Route = createFileRoute("/control-room")({
 const POINTS = [
   {
     title: "Operations across platforms",
-    body: "Control Room uses the systems connected through TeamStack OWS to create rules, automations, flows, and coordinated actions between them.",
+    body: "Use your connected systems together instead of operating each platform separately, allowing actions and information to move between them through TeamStack OWS.",
   },
   {
-    title: "More than monitoring",
-    body: "Control Room is not simply a more advanced monitoring dashboard. Its distinction is cross-platform operational control — deciding how connected systems should work together.",
+    title: "More than an operating dashboard",
+    body: "Control Room goes beyond viewing and organizing operations by allowing TeamStack OWS to actively carry out supported actions across the platforms you have connected.",
   },
   {
-    title: "Workflows, rules, automation",
-    body: "Define what should happen automatically or across systems: connect triggers and actions between platforms instead of handling each one in isolation.",
+    title: "Workflows, rules, and automation",
+    body: "Create triggers, rules, and workflows that can move from one API or connected platform to another, or automate actions entirely within TeamStack OWS.",
   },
   {
     title: "The question it answers",
-    body: "\u201CHow should these connected systems work together, and what should happen automatically or across them?\u201D",
+    body: "\u201CWhat should happen across my connected platforms, and how can TeamStack OWS make it happen automatically?\u201D",
   },
 ];
 
@@ -51,12 +51,13 @@ function ControlRoomPage() {
             Control Room
           </span>
           <h1 className="mx-auto mt-4 max-w-3xl text-3xl font-bold tracking-tight sm:text-4xl">
-            Cross-platform operational control
+            Automate and control operations across connected platforms
           </h1>
           <p className="mx-auto mt-4 max-w-[60ch] text-[16px] leading-relaxed text-muted-foreground">
-            Control Room is where teams create and manage operations that work across their
-            connected platforms. It uses the systems connected through TeamStack OWS to create
-            rules, automations, flows, and coordinated actions between them.
+            Control Room uses the integrations already connected to TeamStack OWS to run actions,
+            rules, workflows, and automations across those platforms. It can connect one platform’s
+            API to another, trigger actions between systems, and automate operations both across
+            external platforms and within TeamStack OWS.
           </p>
         </section>
 
