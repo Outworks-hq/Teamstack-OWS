@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 
 const NAV = [
   { label: "Product", to: "/product", hash: undefined },
-  { label: "Console", to: "/product", hash: "console" },
-  { label: "Control Room", to: "/product", hash: "control-room" },
+  { label: "Console", to: "/console", hash: undefined },
+  { label: "Control Room", to: "/control-room", hash: undefined },
   { label: "Integrations", to: "/integrations", hash: undefined },
   { label: "Pricing", to: "/pricing", hash: undefined },
 ] as const;
