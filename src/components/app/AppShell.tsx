@@ -114,8 +114,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   {userEmail}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => void signOut()}>
-                  <LogOut className="size-4" /> Sign out
+                <DropdownMenuItem onClick={() => void (demoMode ? leaveDemo() : signOut())}>
+                  <LogOut className="size-4" /> {demoMode ? "Exit demo" : "Sign out"}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
